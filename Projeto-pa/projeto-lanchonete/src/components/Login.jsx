@@ -1,9 +1,15 @@
-function Login(){
+import './Login.css'
+function Login({login}){
     return(
         <>
-        <h1>Login</h1>
-        <h2>Digite seu nome: </h2>
-        <h2>Digite sua idade: </h2>
+        <h4>Login</h4>
+        <div className="Logon">
+        <h5>Digite seu nome</h5>
+        <input type="text" id="meuNome" placeholder="Digite seu nome:"/>
+        <h5>Digite sua idade</h5>
+        <input type="text" id="sua idade" placeholder="Digite sua idade:"/>
+        <button onclick="salvarDado()">Salvar</button>
+        </div>
         </>
     )
 }
