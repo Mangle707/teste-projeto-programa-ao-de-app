@@ -1,9 +1,9 @@
-function Header(){
+function Header({titulo,subtitulo}){
     return (
 
         <>
-        <h1>Lanchonete</h1>
-        <h2>O melhor da regiao</h2>
+        <h1>{titulo}</h1>
+        <h2>{subtitulo}</h2>
         </>
         
     )
