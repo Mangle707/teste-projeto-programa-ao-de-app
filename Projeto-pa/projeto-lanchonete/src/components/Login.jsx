@@ -2,13 +2,16 @@ import './Login.css'
 function Login({login}){
     return(
         <>
-        <h4>Login</h4>
-        <div className="Logon">
-        <h5>Digite seu nome</h5>
-        <input type="text" id="meuNome" placeholder="Digite seu nome:"/>
-        <h5>Digite sua idade</h5>
+        
+        <div className="Loging-container">
+            <h4>  </h4>
+        <form class="login-box"> 
+        <h3>Login</h3>
+        <input type="text" id="meuNome" placeholder="Digite seu nome:"/>      
         <input type="text" id="sua idade" placeholder="Digite sua idade:"/>
         <button onclick="salvarDado()">Salvar</button>
+        <h5>Esqueceu a senha?</h5>
+        </form>
         </div>
         </>
     )
