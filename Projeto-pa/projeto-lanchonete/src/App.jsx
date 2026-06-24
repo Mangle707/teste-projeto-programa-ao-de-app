@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import CardProd from "./components/CardProd";
 import Funcionarios from "./components/Funcionario";
 import Footer from "./components/Footer";
+import Contador from "./components/Contador";
 
 function App(){
   return(
@@ -11,8 +12,10 @@ function App(){
               subtitulo="O melhor da regiao"/>
       <Login/>
       <CardProd/>
+      <Contador/>
       <Funcionarios/>
       <Footer/>
+      
       </>
   )
 }
