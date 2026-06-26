@@ -45,8 +45,8 @@ function Funcionarios() {
           </div>
 
           <div className="card1">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz2B2M5Yf_htOBCzeZKp6bx5wiUkn9X70euw&s" />
-            <h3>Anderson Aragao</h3>
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQFT9o8IhGlqOw/profile-displayphoto-scale_400_400/B4DZhYJ7k1GQAo-/0/1753825656670?e=2147483647&v=beta&t=_ekxCc05vi_pnPJoieKICs-eXIlGHKW2R20YLujbNXM" />
+            <h3>Donathan Ramalho Gonçalves</h3>
             <p>Marketing</p>
           </div>
 
