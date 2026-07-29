@@ -5,35 +5,35 @@ import "./CardProd.css";
 function CardProd() {
   const [produtos, setProdutos] = useState([
     {
-    imagem: "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.instagram.com%2Fp%2FDC6nWqauFGJ%2F&ved=0CBYQjRxqFwoTCICd0bvR-JUDFQAAAAAdAAAAABA3&opi=89978449",
+    imagem: "/IMG/xsalada.png",
     nome: "X-Salada",
     descricao: "Pão, hambúrguer, queijo, alface, tomate e maionese.",
     preco: 18,
     quantidade: 0
     },
     {
-      imagem: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-bacon.jpg",//mudar a imagem novamente aqui
+      imagem: "/IMG/xbacon.png",//mudar a imagem novamente aqui
       nome: "X-Bacon",
       descricao: "Hambúrguer, bacon crocante, queijo e molho especial.",
       preco: 22,
       quantidade: 0,
     },
     {
-      imagem: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-tudo.jpg",//mudar a imagem novamente aqui
+      imagem: "/IMG/xandao-xburguer.png",//mudar a imagem novamente aqui
       nome: "X-Tudo",
       descricao: "Hambúrguer duplo, bacon, ovo, queijo, presunto e salada.",
       preco: 28,
       quantidade: 0,
     },
     {
-      imagem: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-batata-frita.jpg",//mudar a imagem novamente aqui
+      imagem: "/IMG/fritas.png",//mudar a imagem novamente aqui
       nome: "Batata Frita",
       descricao: "Porção de batatas crocantes e salgadas.",
       preco: 12,
       quantidade: 0,
     },
     {
-      imagem: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-hot-dog.jpg",//mudar a imagem novamente aqui
+      imagem: "/IMG/hotdog.png",//mudar a imagem novamente aqui
       nome: "Hot Dog",
       descricao: "Pão, salsicha, milho, batata palha e molho.",
       preco: 10,
