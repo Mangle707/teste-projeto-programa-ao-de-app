@@ -35,7 +35,7 @@ function Funcionarios() {
           <div className="card1">
             <img src="/IMG/simone.jpg" alt="Simone" />
             <h3>Simone</h3>
-            <p>Cozinheira</p>
+            <p>Cozinheira mirin</p>
           </div>
 
           <div className="card1">
@@ -47,13 +47,13 @@ function Funcionarios() {
           <div className="card1">
             <img src="/IMG/Donatan.jpg" alt="Donathan Ramalho Gonçalves" />
             <h3>Donathan Ramalho Gonçalves</h3>
-            <p>Marketing</p>
+            <p>Caixa</p>
           </div>
 
           <div className="card1">
             <img src="/IMG/Alexandre.jpg" alt="Alexandre Gaspari" />
             <h3>Alexandre Gaspari</h3>
-            <p>Caixa</p>
+            <p>Cozineiro chefe</p>
           </div>
 
           <div className="card1">

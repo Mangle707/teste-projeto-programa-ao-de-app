@@ -1,0 +1,31 @@
+.menuCarrinho {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+.itemCarrinho {
+    margin-bottom: 10px;
+}
+.btnPagar {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btnPagar:hover {
+    background-color: #218838;
+}
