@@ -16,7 +16,7 @@ function Funcionarios() {
   return (
     <section className="funcionarios">
 
-      <h2>Nossos Funcionários</h2>
+      <h2 className='funcio'>Conheca nossos Funcionários</h2>
 
       <div className="carousel-wrapper">
 
@@ -27,13 +27,13 @@ function Funcionarios() {
         <div className="carousel" ref={carouselRef}>
 
           <div className="card1">
-            <img src="/IMG/stati.jpg" alt="Cesar Stati" />
+            <img src="/IMG/stati.png" alt="Cesar Stati" />
             <h3>Cesar Stati</h3>
             <p>Gerente</p>
           </div>
 
           <div className="card1">
-            <img src="/IMG/simone.jpg" alt="Simone" />
+            <img src="/IMG/simone.png" alt="Simone" />
             <h3>Simone</h3>
             <p>Cozinheira mirin</p>
           </div>

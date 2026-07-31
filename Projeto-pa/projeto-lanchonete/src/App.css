@@ -1,3 +1,22 @@
+.app {
+  width: 100%;
+  min-height: 100vh;
+}
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+header {
+  width: 100%;
+  max-width: 100%;
+}
+* {
+  box-sizing: border-box;
+}
 .counter {
   font-size: 16px;
   padding: 5px 10px;

@@ -4,6 +4,9 @@
   justify-content: center;
   gap: 25px;
   padding: 20px;
+  top: 150px;
+  right: 20px;
+  width: 1500px;
 }
 
 .card {
@@ -67,7 +70,7 @@ button:active{
   transform:scale(.95);
 }
 .carrinho{
-  background-color: #28a745;
+  background-color: #000000;
   color: white;
   border: none;
   padding: 10px;
@@ -78,5 +81,6 @@ button:active{
 }
 
 .carrinho:hover{
-  background-color: #218838;
+  background-color: #dbdbdb;
+  color:#000000
 }

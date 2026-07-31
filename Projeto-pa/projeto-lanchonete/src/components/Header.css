@@ -1,6 +1,7 @@
 .titulo{
     background-color: rgb(0, 0, 0);
 }
+
 .titulo h1,h2{
 color:white;
 display: flex;
@@ -31,8 +32,18 @@ margin-left: 50px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+  
   }
   
   .carrinho:hover {
     background-color: #218838;
   }
+  body {
+    width: 100vw;
+}
+
+.titulo {
+    width: 100vw;
+    margin: 0;
+    padding: 20px;
+}

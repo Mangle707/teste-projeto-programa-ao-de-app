@@ -16,7 +16,7 @@ function Carrinho({ carrinho }) {
 
   return (
     <div className="menuCarrinho">
-      <h2>🛒 Meu Carrinho</h2>
+      <h2 className="h2Carrinho">Meu Carrinho</h2>
 
       {carrinho.length === 0 ? (
         <p>O carrinho está vazio.</p>
