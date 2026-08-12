@@ -1,0 +1,224 @@
+
+/* APENAS O LOGIN */
+
+.login-container {
+    min-height: 100vh;
+    width: 100%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* Fundo SOMENTE do login */
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0.65)
+      ),
+      url('../projeto-lanchonete/public/IMG/imagem_de_fundo.jpg')
+      no-repeat center center;
+  
+    background-size: cover;
+  
+    box-sizing: border-box;
+  
+    opacity: 0;
+    transform: scale(0.95);
+  
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+  
+  .login-container.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  
+  /* =========================
+     CAIXA DE LOGIN
+  ========================= */
+  
+  .login-container .login-box {
+    background: #fff;
+  
+    width: 90%;
+    max-width: 400px;
+  
+    padding: 40px 35px;
+  
+    border-radius: 12px;
+  
+    border-top: 6px solid #ffd000;
+  
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.6);
+  
+    text-align: center;
+  
+    box-sizing: border-box;
+  
+    transition: transform 0.3s ease;
+  }
+  
+  .login-container .login-box:hover {
+    transform: translateY(-5px);
+  }
+  
+  
+  /* =========================
+     TÍTULO
+  ========================= */
+  
+  .login-container .login-box h2 {
+    margin: 0 0 30px 0;
+  
+    color: #111;
+  
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  
+  /* =========================
+     INPUTS
+  ========================= */
+  
+  .login-container .login-box input {
+    width: 100%;
+  
+    padding: 14px;
+  
+    margin-bottom: 18px;
+  
+    box-sizing: border-box;
+  
+    background: #f5f5f5;
+  
+    border: 2px solid #ddd;
+  
+    border-radius: 6px;
+  
+    color: #111;
+  
+    font-size: 15px;
+  
+    outline: none;
+  
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+  
+  .login-container .login-box input::placeholder {
+    color: #777;
+  }
+  
+  .login-container .login-box input:focus {
+    background: #fff;
+  
+    border-color: #ffd000;
+  
+    box-shadow:
+      0 0 0 3px rgba(255, 208, 0, 0.2);
+  }
+  
+  
+  /* =========================
+     BOTÃO
+  ========================= */
+  
+  .login-container .login-box button {
+    width: 100%;
+  
+    padding: 14px;
+  
+    margin-top: 5px;
+  
+    background: #ffd000;
+  
+    border: none;
+  
+    border-radius: 6px;
+  
+    color: #111;
+  
+    font-size: 16px;
+  
+    font-weight: bold;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.3s,
+      transform 0.2s,
+      box-shadow 0.3s;
+  }
+  
+  .login-container .login-box button:hover {
+    background: #e6b900;
+  
+    transform: translateY(-2px);
+  
+    box-shadow:
+      0 5px 15px rgba(255, 208, 0, 0.4);
+  }
+  
+  
+  /* =========================
+     TEXTO
+  ========================= */
+  
+  .login-container .login-box p {
+    margin-top: 20px;
+  
+    color: #555;
+  
+    font-size: 13px;
+  
+    cursor: pointer;
+  }
+  
+  .login-container .login-box p:hover {
+    color: #d4a900;
+  
+    text-decoration: underline;
+  }
+  
+  
+  /* =========================
+     TÍTULO DA LANCHONETE
+  ========================= */
+  
+  .login-container .login-title {
+    font-family: Arial, sans-serif;
+  
+    font-size: 2rem;
+  
+    font-weight: bold;
+  
+    color: #111;
+  
+    margin-bottom: 10px;
+  
+    text-align: center;
+  }
+  
+  
+  /* =========================
+     CELULAR
+  ========================= */
+  
+  @media (max-width: 500px) {
+  
+    .login-container .login-box {
+      width: 85%;
+      padding: 30px 25px;
+    }
+  
+    .login-container .login-box h2 {
+      font-size: 25px;
+    }
+  
+  }

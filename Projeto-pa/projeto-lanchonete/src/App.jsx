@@ -1,28 +1,21 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import Login from "./components/Login";
-import CardProd from "./components/CardProd";
-import Funcionarios from "./components/Funcionario";
-import Footer from "./components/Footer";
+import {Routes, Route} from "react-router-dom";
+import Home from "./pages/Home";
+import Carrinho from "./pages/Carrinho";
+import Pedido from "./pages/Pedido";
+import Login from "./pages/Login";
+function App() {
+ 
 
-
-
-
-function App(){
-  const [carrinho, setCarrinho] = useState([]);
-  return(
+  return (
     <>
-    <div className="App">
-      <Header titulo="Lanchonete do Senai"
-              subtitulo="O melhor da regiao"
-              carrinho={carrinho}/>
-      <Login/>
-      <CardProd carrinho={carrinho}
-                setCarrinho={setCarrinho}/>
-      <Funcionarios/>
-      <Footer/>
-      </div>
-      </>
-  )
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/carrinho" element={<Carrinho />} />
+        <Route path="/pedido" element={<Pedido />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
+  );
 }
-export default App
+
+export default App;

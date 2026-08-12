@@ -1,21 +1,28 @@
-import { useState } from "react";
-import Carrinho from "./Carrinho.jsx";
+import { Link } from "react-router-dom";
+
+
 import './header.css'
 
-function Header({ titulo, subtitulo, carrinho }) {
-    const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
+function Header({ titulo, subtitulo}) {
+
     return (
 
         <>
+        <header>
         <div className="titulo">
         <h1>{titulo}</h1>
         <h2>{subtitulo}</h2>
-          <button className="btnCarrinho" onClick={() => setMostrarCarrinho(!mostrarCarrinho)}>
-          Carrinho</button>
-          </div>
-          {mostrarCarrinho && <Carrinho carrinho={carrinho} />}
+        </div>
+         
+          </header>
+          <nav className="menu">
+            <Link to ="/">Home</Link>
+            <Link to ="/carrinho">Carrinho</Link>
+            <Link to ="/pedido">Pedido</Link>
+            <Link to ="/login">Login</Link>
+          </nav>
         </>
     );
 }
 export default Header 
-//export sem precia estar no final para poder ser exportado
+//export precia estar no final para poder ser exportado
