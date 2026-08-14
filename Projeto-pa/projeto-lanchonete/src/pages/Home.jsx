@@ -1,3 +1,4 @@
+import "./Home.css";
 import Header from "../components/Header";
 import CardProd from "../components/CardProd";
 import Funcionarios from "../components/Funcionario";
@@ -28,25 +29,25 @@ function Home({ carrinho, setCarrinho }) {
 
   return (
     <div className="App">
-
+     <div className="home">
       <Header
         titulo="Lanchonete do Senai"
         subtitulo="O melhor da regiao"
         carrinho={carrinho}
       />
-
+      
       <CardProd
         produtos={produtos}
         carrinho={carrinho}
         setCarrinho={setCarrinho}
       />
-
+       
       <Funcionarios
         funcionarios={funcionarios}
       />
 
       <Footer />
-
+      </div>
     </div>
   );
 }

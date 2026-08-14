@@ -7,15 +7,18 @@
   top: 150px;
   right: 20px;
   width: 1500px;
+  background-color: transparent;
 }
 
 .card {
   width: 300px;
-  border: 1px solid #ddd;
+  border: 2px solid #fffcfc;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  background-color: rgb(253, 188, 48);
+  color: #000000;
 }
 .imagem{
   width: 100%;
@@ -51,15 +54,15 @@ button{
 }
 
 .adicionar{
-  background:#28a745;
+  background:#fdd10c;
 }
 
 .adicionar:hover{
-  background:#218838;
+  background:#97722d;
 }
 
 .remover{
-  background:#dc3545;
+  background:#ff2600;
 }
 
 .remover:hover{
@@ -81,6 +84,6 @@ button:active{
 }
 
 .carrinho:hover{
-  background-color: #dbdbdb;
+  background-color: #ffffff;
   color:#000000
 }
