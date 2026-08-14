@@ -1,15 +1,25 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  .pagina-pedido {
-    min-height: 100vh;
-  
-    background-color: #111;
-  
-    padding: 30px;
-  }
-  
+* * {
+  box-sizing: border-box;
+}
+
+/* FUNDO SOMENTE DA PÁGINA DE PEDIDO */
+
+.pagina-pedido {
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.65)
+    ),
+    url("/IMG/imagem_de_fundo.jpg")
+    no-repeat center center;
+
+  background-size: cover;
+  background-attachment: fixed;
+
+  padding: 30px;
+}
   
   /* CABEÇALHO */
   
@@ -30,6 +40,7 @@
   
     font-size: 38px;
     font-weight: 900;
+    color: white;
   }
   
   .cabecalho-pedido p {
@@ -339,7 +350,7 @@
   
     font-weight: bold;
   }
-  
+
   
   /* RESPONSIVO */
   
@@ -347,14 +358,17 @@
   
     .pagina-pedido {
       padding: 15px;
+      
     }
   
     .pedido {
       padding: 25px 20px;
+      
     }
   
     .cabecalho-pedido h1 {
       font-size: 26px;
+      
     }
   
     .fluxo-status {

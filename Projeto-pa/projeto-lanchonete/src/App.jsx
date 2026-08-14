@@ -9,10 +9,24 @@ import Login from "./pages/Login";
 function App() {
 
   const [carrinho, setCarrinho] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Verifica se já estava logado
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("login") === "true"
+  );
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+
+    // Guarda o login no navegador
+    localStorage.setItem("login", "true");
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+
+    // Remove o login
+    localStorage.removeItem("login");
   };
 
   return (
@@ -20,7 +34,13 @@ function App() {
 
       <Route
         path="/login"
-        element={<Login onLogin={handleLogin} />}
+        element={
+          isLoggedIn ? (
+            <Navigate to="/" />
+          ) : (
+            <Login onLogin={handleLogin} />
+          )
+        }
       />
 
       <Route
