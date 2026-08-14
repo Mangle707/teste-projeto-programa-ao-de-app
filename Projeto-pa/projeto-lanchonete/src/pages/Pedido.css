@@ -1,0 +1,376 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .pagina-pedido {
+    min-height: 100vh;
+  
+    background-color: #111;
+  
+    padding: 30px;
+  }
+  
+  
+  /* CABEÇALHO */
+  
+  .cabecalho-pedido {
+    max-width: 1000px;
+  
+    margin: 0 auto 25px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    color: white;
+  }
+  
+  .cabecalho-pedido h1 {
+    margin: 0;
+  
+    font-size: 38px;
+    font-weight: 900;
+  }
+  
+  .cabecalho-pedido p {
+    margin-top: 5px;
+  
+    font-size: 18px;
+  
+    color: #ccc;
+  }
+  
+  .voltar-carrinho {
+    background-color: #f5c400;
+  
+    color: #000;
+  
+    padding: 13px 22px;
+  
+    border-radius: 8px;
+  
+    text-decoration: none;
+  
+    font-weight: bold;
+  }
+  
+  
+  /* CARD DO PEDIDO */
+  
+  .pedido {
+    max-width: 1000px;
+  
+    margin: auto;
+  
+    background-color: white;
+  
+    border-radius: 15px;
+  
+    padding: 40px;
+  
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.5);
+  }
+  
+  
+  /* INFORMAÇÕES */
+  
+  .info-pedido {
+    display: flex;
+  
+    justify-content: space-between;
+  
+    margin-bottom: 25px;
+  }
+  
+  .info-pedido div {
+    display: flex;
+  
+    flex-direction: column;
+  
+    gap: 5px;
+  }
+  
+  .info-pedido span {
+    font-size: 18px;
+  
+    color: #666;
+  
+    font-weight: bold;
+  }
+  
+  .info-pedido strong {
+    font-size: 32px;
+  }
+  
+  
+  /* LINHAS */
+  
+  .pedido hr {
+    border: none;
+  
+    border-top: 2px solid #222;
+  
+    margin: 25px 0;
+  }
+  
+  
+  /* PRODUTOS */
+  
+  .produtos-pedido h2 {
+    font-size: 25px;
+  
+    margin-bottom: 20px;
+  }
+  
+  .item-pedido {
+    display: flex;
+  
+    align-items: center;
+  
+    gap: 25px;
+  
+    font-size: 30px;
+  
+    padding: 15px 0;
+  
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .item-pedido strong {
+    min-width: 70px;
+  
+    font-size: 32px;
+  }
+  
+  .item-pedido span {
+    font-weight: bold;
+  }
+  
+  
+  /* ENDEREÇO */
+  
+  .endereco {
+    font-size: 16px;
+  
+    color: #333;
+  
+    line-height: 1.6;
+  }
+  
+  .endereco strong {
+    font-size: 20px;
+  }
+  
+  .endereco p {
+    margin: 5px 0;
+  }
+  
+  
+  /* STATUS */
+  
+  .status-pedido {
+    text-align: center;
+  }
+  
+  .status-pedido h2 {
+    font-size: 30px;
+  
+    margin-bottom: 15px;
+  }
+  
+  
+  /* STATUS ATUAL */
+  
+  .status-atual {
+    display: inline-block;
+  
+    padding: 15px 35px;
+  
+    background-color: #f5c400;
+  
+    color: #000;
+  
+    border-radius: 10px;
+  
+    font-size: 28px;
+  
+    font-weight: 900;
+  
+    margin-bottom: 40px;
+  }
+  
+  
+  /* FLUXO */
+  
+  .fluxo-status {
+    display: flex;
+  
+    align-items: flex-start;
+  
+    justify-content: center;
+  
+    width: 100%;
+  
+    margin-bottom: 35px;
+  }
+  
+  .etapa {
+    display: flex;
+  
+    align-items: center;
+  
+    position: relative;
+  }
+  
+  
+  /* BOLINHA */
+  
+  .bolinha {
+    width: 55px;
+    height: 55px;
+  
+    border-radius: 50%;
+  
+    background-color: #ddd;
+  
+    color: #777;
+  
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  
+    font-size: 20px;
+  
+    font-weight: bold;
+  }
+  
+  .bolinha.ativa {
+    background-color: #f5c400;
+  
+    color: #000;
+  }
+  
+  
+  /* NOME */
+  
+  .nome-status {
+    position: absolute;
+  
+    top: 65px;
+  
+    left: 50%;
+  
+    transform: translateX(-50%);
+  
+    white-space: nowrap;
+  
+    color: #777;
+  
+    font-weight: bold;
+  
+    font-size: 16px;
+  }
+  
+  .nome-status.ativo {
+    color: #000;
+  }
+  
+  
+  /* LINHA */
+  
+  .linha-status {
+    width: 100px;
+  
+    height: 5px;
+  
+    background-color: #ddd;
+  
+    margin: 0 8px;
+  }
+  
+  .linha-status.preenchida {
+    background-color: #f5c400;
+  }
+  
+  
+  /* BOTÃO */
+  
+  .botao-avancar {
+    margin-top: 50px;
+  
+    padding: 17px 35px;
+  
+    border: none;
+  
+    border-radius: 10px;
+  
+    background-color: #000;
+  
+    color: white;
+  
+    font-size: 20px;
+  
+    font-weight: bold;
+  
+    cursor: pointer;
+  }
+  
+  .botao-avancar:hover {
+    background-color: #333;
+  }
+  
+  
+  /* ENTREGUE */
+  
+  .pedido-entregue {
+    margin-top: 50px;
+  
+    padding: 18px;
+  
+    background-color: #222;
+  
+    color: white;
+  
+    border-radius: 10px;
+  
+    font-size: 22px;
+  
+    font-weight: bold;
+  }
+  
+  
+  /* RESPONSIVO */
+  
+  @media (max-width: 700px) {
+  
+    .pagina-pedido {
+      padding: 15px;
+    }
+  
+    .pedido {
+      padding: 25px 20px;
+    }
+  
+    .cabecalho-pedido h1 {
+      font-size: 26px;
+    }
+  
+    .fluxo-status {
+      flex-direction: column;
+  
+      align-items: center;
+  
+      gap: 50px;
+    }
+  
+    .linha-status {
+      display: none;
+    }
+  
+    .item-pedido {
+      font-size: 22px;
+    }
+  
+  }

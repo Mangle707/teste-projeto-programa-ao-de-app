@@ -1,37 +1,54 @@
-import { useState } from "react";
 import Header from "../components/Header";
-import Login from "../pages/Login";
 import CardProd from "../components/CardProd";
 import Funcionarios from "../components/Funcionario";
 import Footer from "../components/Footer";
-function Home(){
-    const [carrinho, setCarrinho] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar o login
-  
-    // Função para lidar com o login
-    const handleLogin = () => {
-      setIsLoggedIn(true); // Atualiza o estado para indicar que o usuário está logado
-    };
-    return(
 
-          <>
-          <div className="App">
-        {isLoggedIn ? ( // Verifica se o usuário está logado
-          <>
-            <Header
-              titulo="Lanchonete do Senai"
-              subtitulo="O melhor da regiao"
-              
-            />
-            <CardProd carrinho={carrinho} setCarrinho={setCarrinho} />
-            <Funcionarios />
-            <Footer />
-          </>
-        ) : (
-          <Login onLogin={handleLogin} /> // Renderiza o componente Login
-        )}
-      </div>
-          </>
-    )
+function Home({ carrinho, setCarrinho }) {
+//Produtos
+  const produtos = [
+    {imagem: "/IMG/xsalada.jpg",nome: "X-Salada",categoria: "Lanches",descricao: "Pão, hambúrguer, queijo, alface, tomate e maionese.",preco: 18},
+    {imagem: "/IMG/xbacon.webp",nome: "X-Bacon",categoria: "Lanches",descricao: "Hambúrguer, bacon crocante, queijo e molho especial.",preco: 22},
+    {imagem: "/IMG/xtudo.jpg",nome: "X-Tudo",categoria: "Lanches",descricao: "Hambúrguer duplo, bacon, ovo, queijo, presunto e salada.",preco: 28},
+    {imagem: "/IMG/fritas.webp",nome: "Batata Frita",categoria: "Porções",descricao: "Porção de batatas crocantes e salgadas.",preco: 12},
+    {imagem: "/IMG/hotdog.webp",nome: "Hot Dog",categoria: "Lanches",descricao: "Pão, salsicha, milho, batata palha e molho.",preco: 10},
+    {imagem: "/IMG/coca.webp",nome: "Coca-Cola",categoria: "Bebidas",descricao: "Refrigerante de cola 300ml geladinho.",preco: 17},
+    {imagem: "/IMG/agua.png",nome: "Água Crystal",categoria: "Bebidas",descricao: "Água mineral natural 500ml.",preco: 5},
+    {imagem: "/IMG/fanta.jpg",nome: "Fanta",categoria: "Bebidas",descricao: "Fanta laranja ou uva 220ml.",preco: 5}
+  ];
+
+  //Funcionarios
+  const funcionarios = [
+    {imagem: "/IMG/stati.png",nome: "Cesar Stati",cargo: "Gerente"},
+    {imagem: "/IMG/simone.png",nome: "Simone",cargo: "Cozinheira mirin"},
+    {imagem: "/IMG/anderson.jpg",nome: "Anderson Cidade",cargo: "CEO"},
+    {imagem: "/IMG/Donatan.jpg",nome: "Donathan Ramalho Gonçalves",cargo: "Caixa"},
+    {imagem: "/IMG/Alexandre.jpg",nome: "Alexandre Gaspari",cargo: "Cozinheiro chefe"},
+    {imagem: "/IMG/empregados.jpg",nome: "Nosso pessoal de atendimento",cargo: "Empregados"}
+  ];
+
+  return (
+    <div className="App">
+
+      <Header
+        titulo="Lanchonete do Senai"
+        subtitulo="O melhor da regiao"
+        carrinho={carrinho}
+      />
+
+      <CardProd
+        produtos={produtos}
+        carrinho={carrinho}
+        setCarrinho={setCarrinho}
+      />
+
+      <Funcionarios
+        funcionarios={funcionarios}
+      />
+
+      <Footer />
+
+    </div>
+  );
 }
-export default Home
+
+export default Home;
