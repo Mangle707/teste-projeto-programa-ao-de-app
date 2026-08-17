@@ -1,0 +1,324 @@
+/* =========================
+   RECUPERAÇÃO DE SENHA
+========================= */
+
+.recuperar-container {
+    min-height: 100vh;
+    width: 100%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    position: relative;
+    overflow: hidden;
+  
+    background:
+      linear-gradient(
+        to top,
+        rgba(255, 208, 0, 0.85) 0%,
+        rgba(255, 208, 0, 0.55) 25%,
+        rgba(0, 0, 0, 0.45) 60%,
+        rgba(0, 0, 0, 0.75) 100%
+      ),
+      url("/IMG/imagem_de_fundo.jpg")
+      no-repeat center center;
+  
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  
+  /* =========================
+     CAIXA
+  ========================= */
+  
+  .recuperar-box {
+    position: relative;
+    z-index: 2;
+  
+    width: 90%;
+    max-width: 420px;
+  
+    padding: 40px 35px;
+  
+    background: white;
+  
+    border-radius: 12px;
+  
+    border-top: 6px solid #ffd000;
+  
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.6);
+  
+    text-align: center;
+  }
+  
+  
+  /* =========================
+     TÍTULOS
+  ========================= */
+  
+  .recuperar-box h1 {
+    margin: 0 0 10px;
+  
+    color: #111;
+  
+    font-size: 30px;
+  
+    font-weight: bold;
+  }
+  
+  .recuperar-box h2 {
+    margin: 0 0 20px;
+  
+    color: #111;
+  
+    font-size: 25px;
+  }
+  
+  
+  /* =========================
+     TEXTO
+  ========================= */
+  
+  .instrucao {
+    color: #666;
+  
+    font-size: 14px;
+  
+    line-height: 1.5;
+  
+    margin-bottom: 25px;
+  }
+  
+  
+  /* =========================
+     INPUT
+  ========================= */
+  
+  .recuperar-box input {
+    width: 100%;
+  
+    padding: 14px;
+  
+    margin-bottom: 18px;
+  
+    box-sizing: border-box;
+  
+    background: #f5f5f5;
+  
+    border: 2px solid #ddd;
+  
+    border-radius: 6px;
+  
+    color: #111;
+  
+    font-size: 15px;
+  
+    outline: none;
+  }
+  
+  .recuperar-box input:focus {
+    background: white;
+  
+    border-color: #ffd000;
+  
+    box-shadow:
+      0 0 0 3px rgba(255, 208, 0, 0.2);
+  }
+  
+  
+  /* =========================
+     BOTÃO
+  ========================= */
+  
+  .recuperar-box button {
+    width: 100%;
+  
+    padding: 14px;
+  
+    background: #ffd000;
+  
+    border: none;
+  
+    border-radius: 6px;
+  
+    color: #111;
+  
+    font-size: 16px;
+  
+    font-weight: bold;
+  
+    cursor: pointer;
+  
+    transition: 0.3s;
+  }
+  
+  .recuperar-box button:hover {
+    background: #e6b900;
+  
+    transform: translateY(-2px);
+  
+    box-shadow:
+      0 5px 15px rgba(255, 208, 0, 0.4);
+  }
+  
+  
+  /* =========================
+     VOLTAR
+  ========================= */
+  
+  .voltar {
+    display: inline-block;
+  
+    margin-top: 25px;
+  
+    color: #555;
+  
+    font-size: 14px;
+  
+    font-weight: bold;
+  
+    text-decoration: none;
+  
+    transition: 0.3s;
+  }
+  
+  .voltar:hover {
+    color: #d4a900;
+  
+    text-decoration: underline;
+  }
+  
+  
+  /* =========================
+     SUCESSO
+  ========================= */
+  
+  .sucesso h2 {
+    color: #111;
+  }
+  
+  .sucesso p {
+    color: #555;
+  
+    line-height: 1.5;
+  }
+  
+  
+  /* =========================
+     PIXELS
+  ========================= */
+  
+  .pixels {
+    position: absolute;
+  
+    inset: 0;
+  
+    overflow: hidden;
+  
+    pointer-events: none;
+  
+    z-index: 1;
+  }
+  
+  .pixels span {
+    position: absolute;
+  
+    bottom: -20px;
+  
+    width: 6px;
+    height: 6px;
+  
+    background: #ffd000;
+  
+    box-shadow:
+      0 0 8px rgba(255, 208, 0, 0.8);
+  
+    opacity: 0;
+  
+    animation: subir 5s linear infinite;
+  }
+  
+  .pixels span:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  .pixels span:nth-child(2) {
+    left: 25%;
+    animation-delay: 2s;
+  }
+  
+  .pixels span:nth-child(3) {
+    left: 40%;
+    animation-delay: 4s;
+  }
+  
+  .pixels span:nth-child(4) {
+    left: 55%;
+    animation-delay: 1s;
+  }
+  
+  .pixels span:nth-child(5) {
+    left: 70%;
+    animation-delay: 3s;
+  }
+  
+  .pixels span:nth-child(6) {
+    left: 80%;
+    animation-delay: 5s;
+  }
+  
+  .pixels span:nth-child(7) {
+    left: 90%;
+    animation-delay: 1.5s;
+  }
+  
+  .pixels span:nth-child(8) {
+    left: 50%;
+    animation-delay: 3.5s;
+  }
+  
+  
+  @keyframes subir {
+  
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0;
+    }
+  
+    10% {
+      opacity: 0.8;
+    }
+  
+    50% {
+      opacity: 0.5;
+    }
+  
+    100% {
+      transform: translateY(-100vh) scale(0.3);
+      opacity: 0;
+    }
+  
+  }
+  
+  
+  /* =========================
+     CELULAR
+  ========================= */
+  
+  @media (max-width: 500px) {
+  
+    .recuperar-box {
+      width: 85%;
+  
+      padding: 30px 25px;
+    }
+  
+    .recuperar-box h1 {
+      font-size: 25px;
+    }
+  
+  }

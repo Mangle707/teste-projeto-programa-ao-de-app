@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.css";
 
 function Login({ onLogin }) {
@@ -28,6 +28,26 @@ function Login({ onLogin }) {
       }`}
     >
 
+      {/* PIXELS SUBINDO */}
+      <div className={styles.pixels}>
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </div>
+
+
+      {/* CAIXA DE LOGIN */}
       <div className={styles["login-box"]}>
 
         <h1 className={styles["login-title"]}>
@@ -54,9 +74,12 @@ function Login({ onLogin }) {
             Entrar
           </button>
 
-          <p>
-            Esqueceu sua senha?
-          </p>
+          <Link
+           to="/esqueci-senha"
+          className={styles["esqueci-senha"]}
+          >
+           Esqueceu sua senha?
+          </Link>
 
         </form>
 

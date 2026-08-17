@@ -209,10 +209,24 @@ function Pedido({ carrinho }) {
 
           )}
 
+
+          {/* PEDIDO ENTREGUE */}
           {status === "Entregue" && (
 
             <div className="pedido-entregue">
-              ✓ Pedido Entregue
+
+              <div className="check-entregue">
+                ✓
+              </div>
+
+              <h2>
+                Pedido Entregue!
+              </h2>
+
+              <p>
+                Esperando próximo pedido...
+              </p>
+
             </div>
 
           )}

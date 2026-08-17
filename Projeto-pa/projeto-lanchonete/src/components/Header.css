@@ -2,6 +2,28 @@
     background-color: rgb(0, 0, 0);
 }
 
+.link-login {
+  color: #000;
+  background-color: #f5c400;
+
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.link-login:hover {
+  background-color: #000;
+  color: #f5c400;
+  transform: translateY(-2px);
+}
+
 .titulo h1,h2{
 color:white;
 display: flex;
