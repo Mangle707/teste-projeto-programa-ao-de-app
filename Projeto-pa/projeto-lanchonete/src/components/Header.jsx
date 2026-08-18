@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import "./Header.css";
 
 function Header({ titulo, subtitulo, onLogout }) {
@@ -18,10 +17,24 @@ function Header({ titulo, subtitulo, onLogout }) {
   return (
     <>
       <header>
+
         <div className="titulo">
-          <h1>{titulo}</h1>
-          <h2>{subtitulo}</h2>
+
+          {/* ÍCONE */}
+          <img 
+            src="/IMG/Icone.png"
+            alt="Logo Danger Hamburgers"
+            className="logo"
+          />
+
+          {/* TÍTULOS */}
+          <div className="textos-titulo">
+            <h1>{titulo}</h1>
+            <h2>{subtitulo}</h2>
+          </div>
+
         </div>
+
       </header>
 
       <nav className="menu">

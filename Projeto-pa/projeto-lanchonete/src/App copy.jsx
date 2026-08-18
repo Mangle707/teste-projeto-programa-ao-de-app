@@ -20,7 +20,7 @@ function App() {
         {isLoggedIn ? ( // Verifica se o usuário está logado
           <>
             <Header
-              titulo="Lanchonete do Senai"
+              titulo="Danger Hamburguers"
               subtitulo="O melhor da regiao"
               carrinho={carrinho}
             />

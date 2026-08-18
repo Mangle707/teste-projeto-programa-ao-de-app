@@ -43,7 +43,23 @@
   opacity: 1;
   transform: scale(1);
 }
+/* =========================
+   LOGO DO LOGIN
+========================= */
 
+.login-container .logo {
+  width: 120px;
+  height: 120px;
+
+  object-fit: contain;
+
+  display: block;
+
+  margin: 0 auto 10px;
+
+  position: relative;
+  z-index: 2;
+}
 
 /* =========================
    CAIXA DE LOGIN

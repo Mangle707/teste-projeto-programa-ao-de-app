@@ -34,21 +34,21 @@ function Home({ carrinho, setCarrinho, onLogout }) {
       nome: "Batata Frita",
       categoria: "Porções",
       descricao: "Porção de batatas crocantes e salgadas.",
-      preco: 12
+      preco: 10
     },
     {
       imagem: "/IMG/hotdog.webp",
       nome: "Hot Dog",
       categoria: "Lanches",
       descricao: "Pão, salsicha, milho, batata palha e molho.",
-      preco: 10
+      preco: 17
     },
     {
       imagem: "/IMG/coca.webp",
       nome: "Coca-Cola",
       categoria: "Bebidas",
       descricao: "Refrigerante de cola 300ml geladinho.",
-      preco: 17
+      preco: 6
     },
     {
       imagem: "/IMG/agua.png",
@@ -106,12 +106,12 @@ function Home({ carrinho, setCarrinho, onLogout }) {
       <div className="home">
 
         <Header
-          titulo="Lanchonete do Senai"
-          subtitulo="O melhor da regiao"
-          carrinho={carrinho}
-          onLogout={onLogout}
+         titulo="Danger Hamburguers"
+         subtitulo="O melhor da regiao"
+         carrinho={carrinho}
+         onLogout={onLogout}
+         
         />
-
         <CardProd
           produtos={produtos}
           carrinho={carrinho}

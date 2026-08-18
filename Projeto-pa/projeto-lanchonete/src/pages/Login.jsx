@@ -50,8 +50,15 @@ function Login({ onLogin }) {
       {/* CAIXA DE LOGIN */}
       <div className={styles["login-box"]}>
 
+        {/* ÍCONE DA MARCA */}
+        <img
+          src="/IMG/Icone.png"
+          alt="Logo Danger Hamburgers"
+          className={styles.logo}
+        />
+
         <h1 className={styles["login-title"]}>
-          Lanchonete do Senai
+          
         </h1>
 
         <h2>Login</h2>
@@ -75,10 +82,10 @@ function Login({ onLogin }) {
           </button>
 
           <Link
-           to="/esqueci-senha"
-          className={styles["esqueci-senha"]}
+            to="/esqueci-senha"
+            className={styles["esqueci-senha"]}
           >
-           Esqueceu sua senha?
+            Esqueceu sua senha?
           </Link>
 
         </form>
