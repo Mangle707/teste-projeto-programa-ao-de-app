@@ -15,3 +15,30 @@
   
     background-attachment: fixed;
   }
+  .conta-usuario {
+    display: flex;
+  
+    justify-content: flex-end;
+  
+    align-items: center;
+  
+    padding: 10px 40px;
+  
+    background-color: #111;
+  
+    color: white;
+  
+    font-size: 16px;
+  
+    font-weight: 500;
+  }
+  
+  .conta-usuario strong {
+    color: #f5c400;
+  
+    margin-left: 6px;
+  
+    font-weight: 900;
+  
+    text-transform: capitalize;
+  }

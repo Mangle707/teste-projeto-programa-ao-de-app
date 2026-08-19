@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Carrinho.css";
 
 function Carrinho({ carrinho, setCarrinho }) {
+
+  const navigate = useNavigate();
 
   const totalItens = carrinho.reduce(
     (total, produto) => total + produto.quantidade,
@@ -18,18 +20,93 @@ function Carrinho({ carrinho, setCarrinho }) {
     setCarrinho([]);
   };
 
+
+  // =========================
+  // FINALIZAR PEDIDO
+  // =========================
+
+  const finalizarPedido = () => {
+
+    if (carrinho.length === 0) {
+      alert("Seu carrinho está vazio.");
+      return;
+    }
+  
+    const pedidos =
+      JSON.parse(localStorage.getItem("pedidos")) || [];
+  
+    const nomeUsuario =
+      localStorage.getItem("nomeUsuario") || "Cliente";
+  
+  
+    const novoPedido = {
+  
+      id: Date.now(),
+  
+      numero: pedidos.length + 1,
+  
+      nomeUsuario: nomeUsuario,
+  
+      carrinho: carrinho,
+  
+      status: "Recebido",
+  
+      horario: new Date().toLocaleTimeString(
+        "pt-BR",
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      )
+  
+    };
+  
+  
+    const novaFila = [
+      ...pedidos,
+      novoPedido
+    ];
+  
+  
+    localStorage.setItem(
+      "pedidos",
+      JSON.stringify(novaFila)
+    );
+  
+  
+    // Limpa o carrinho
+    setCarrinho([]);
+  
+  
+    // Mostra mensagem
+    alert(
+      `Pedido #${String(novoPedido.numero).padStart(3, "0")} enviado com sucesso!`
+    );
+  
+  
+    // Volta para Home depois da mensagem
+    navigate("/");
+  };
+
   return (
+
     <div className="pagina-carrinho">
 
       <header className="cabecalho-carrinho">
 
-        <h1>CARRINHO DE COMPRAS</h1>
+        <h1>
+          CARRINHO DE COMPRAS
+        </h1>
 
-        <Link to="/" className="voltar">
+        <Link
+          to="/"
+          className="voltar"
+        >
           ← Voltar para Home
         </Link>
 
       </header>
+
 
       <main className="conteudo-carrinho">
 
@@ -37,13 +114,18 @@ function Carrinho({ carrinho, setCarrinho }) {
 
           <div className="carrinho-vazio">
 
-            <h2>Seu carrinho está vazio</h2>
+            <h2>
+              Seu carrinho está vazio
+            </h2>
 
             <p>
               Adicione alguns produtos para continuar.
             </p>
 
-            <Link to="/" className="botao-voltar">
+            <Link
+              to="/"
+              className="botao-voltar"
+            >
               Ver Produtos
             </Link>
 
@@ -52,6 +134,10 @@ function Carrinho({ carrinho, setCarrinho }) {
         ) : (
 
           <>
+
+            {/* =========================
+                PRODUTOS
+            ========================= */}
 
             <div className="tabela-carrinho">
 
@@ -64,6 +150,7 @@ function Carrinho({ carrinho, setCarrinho }) {
                 <span>Preço</span>
 
               </div>
+
 
               {carrinho.map((produto, index) => (
 
@@ -99,22 +186,44 @@ function Carrinho({ carrinho, setCarrinho }) {
 
             </div>
 
+
+            {/* =========================
+                RESUMO
+            ========================= */}
+
             <div className="resumo-carrinho">
 
               <div>
-                <strong>Total de itens:</strong>
-                <span>{totalItens}</span>
+
+                <strong>
+                  Total de itens:
+                </strong>
+
+                <span>
+                  {totalItens}
+                </span>
+
               </div>
 
+
               <div>
-                <strong>Valor Total:</strong>
+
+                <strong>
+                  Valor Total:
+                </strong>
 
                 <span className="valor-total">
                   R$ {valorTotal.toFixed(2)}
                 </span>
+
               </div>
 
             </div>
+
+
+            {/* =========================
+                AÇÕES
+            ========================= */}
 
             <div className="acoes-carrinho">
 
@@ -125,12 +234,13 @@ function Carrinho({ carrinho, setCarrinho }) {
                 Limpar Carrinho
               </button>
 
-              <Link
-                to="/pedido"
+
+              <button
                 className="finalizar"
+                onClick={finalizarPedido}
               >
                 Finalizar Pedido
-              </Link>
+              </button>
 
             </div>
 
@@ -141,6 +251,7 @@ function Carrinho({ carrinho, setCarrinho }) {
       </main>
 
     </div>
+
   );
 }
 

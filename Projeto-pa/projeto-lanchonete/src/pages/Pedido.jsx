@@ -1,22 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pedido.css";
 
-function Pedido({ carrinho }) {
+function Pedido() {
 
-  const [status, setStatus] = useState("Recebido");
+  const [pedidos, setPedidos] = useState([]);
 
-  const avancarStatus = () => {
-    if (status === "Recebido") {
-      setStatus("Preparando");
-    } 
-    else if (status === "Preparando") {
-      setStatus("Pronto");
-    } 
-    else if (status === "Pronto") {
-      setStatus("Entregue");
-    }
-  };
+
+  // =========================
+  // STATUS DO PEDIDO
+  // =========================
 
   const statusLista = [
     "Recebido",
@@ -25,218 +18,458 @@ function Pedido({ carrinho }) {
     "Entregue"
   ];
 
-  const statusAtual = statusLista.indexOf(status);
+
+  // =========================
+  // BUSCAR PEDIDOS
+  // =========================
+
+  useEffect(() => {
+
+    const pedidosSalvos =
+      JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    setPedidos(pedidosSalvos);
+
+  }, []);
+
+
+  // =========================
+  // AVANÇAR STATUS
+  // =========================
+
+  const avancarStatus = (id) => {
+
+    const pedidosAtualizados = pedidos.map((pedido) => {
+
+      if (pedido.id !== id) {
+        return pedido;
+      }
+
+
+      const statusAtual =
+        statusLista.indexOf(pedido.status);
+
+
+      if (statusAtual < statusLista.length - 1) {
+
+        return {
+          ...pedido,
+          status: statusLista[statusAtual + 1]
+        };
+
+      }
+
+
+      return pedido;
+
+    });
+
+
+    setPedidos(pedidosAtualizados);
+
+
+    localStorage.setItem(
+      "pedidos",
+      JSON.stringify(pedidosAtualizados)
+    );
+
+  };
+
+
+  // =========================
+  // REMOVER PEDIDO ENTREGUE
+  // =========================
+
+  const removerPedido = (id) => {
+
+    const pedidosAtualizados =
+      pedidos.filter(
+        (pedido) => pedido.id !== id
+      );
+
+
+    setPedidos(pedidosAtualizados);
+
+
+    localStorage.setItem(
+      "pedidos",
+      JSON.stringify(pedidosAtualizados)
+    );
+
+  };
+
 
   return (
+
     <div className="pagina-pedido">
 
-      {/* CABEÇALHO */}
+
+      {/* =========================
+          CABEÇALHO
+      ========================= */}
+
       <header className="cabecalho-pedido">
 
         <div>
-          <h1>PEDIDO #001</h1>
-          <p>Pedido para a cozinha</p>
+
+          <h1>
+            FILA DE PEDIDOS
+          </h1>
+
+          <p>
+            Pedidos para a cozinha
+          </p>
+
         </div>
 
-        <Link to="/carrinho" className="voltar-carrinho">
+
+        <Link
+          to="/"
+          className="voltar-carrinho"
+        >
           ← Voltar
         </Link>
 
       </header>
 
 
-      {/* PEDIDO */}
-      <main className="pedido">
+      {/* =========================
+          FILA
+      ========================= */}
 
-        {/* INFORMAÇÕES */}
-        <section className="info-pedido">
+      <main className="fila-pedidos">
 
-          <div>
-            <span>Mesa</span>
-            <strong>03</strong>
+
+        {pedidos.length === 0 ? (
+
+          <div className="sem-pedidos">
+
+            <h2>
+              Nenhum pedido na fila
+            </h2>
+
+            <p>
+              Aguardando novos pedidos...
+            </p>
+
           </div>
 
-          <div>
-            <span>Horário</span>
-            <strong>12:15</strong>
-          </div>
-
-        </section>
+        ) : (
 
 
-        <hr />
+          pedidos.map((pedido, index) => {
+
+            const statusAtual =
+              statusLista.indexOf(
+                pedido.status
+              );
 
 
-        {/* PRODUTOS */}
-        <section className="produtos-pedido">
+            return (
 
-          <h2>Itens do Pedido</h2>
-
-          {carrinho && carrinho.length > 0 ? (
-
-            carrinho.map((produto, index) => (
-
-              <div
-                className="item-pedido"
-                key={index}
+              <article
+                className="pedido"
+                key={pedido.id}
               >
 
-                <strong>
-                  {produto.quantidade}x
-                </strong>
 
-                <span>
-                  {produto.nome}
-                </span>
+                {/* =========================
+                    CABEÇALHO DO PEDIDO
+                ========================= */}
 
-              </div>
+                <header className="topo-pedido">
 
-            ))
+                  <div>
 
-          ) : (
+                    <h1>
+                      PEDIDO #
+                      {String(
+                        pedido.numero
+                      ).padStart(3, "0")}
+                    </h1>
 
-            <>
-              <div className="item-pedido">
-                <strong>2x</strong>
-                <span>X-Burguer</span>
-              </div>
+                    <p>
+                      Pedido para a cozinha
+                    </p>
 
-              <div className="item-pedido">
-                <strong>1x</strong>
-                <span>Batata Frita</span>
-              </div>
-
-              <div className="item-pedido">
-                <strong>2x</strong>
-                <span>Coca-Cola</span>
-              </div>
-            </>
-
-          )}
-
-        </section>
+                  </div>
 
 
-        <hr />
+                  <div className="posicao-fila">
+
+                    <span>
+                      FILA
+                    </span>
+
+                    <strong>
+                      #{index + 1}
+                    </strong>
+
+                  </div>
+
+                </header>
 
 
-        {/* ENDEREÇO */}
-        <section className="endereco">
-
-          <strong>senaipr.org.br</strong>
-
-          <p>
-            Rua Senador Accioly Filho, 298 |
-            Cidade Industrial de Curitiba
-          </p>
-
-          <p>
-            81310-000 | Curitiba-PR | (41) 3271-7100
-          </p>
-
-        </section>
+                <hr />
 
 
-        <hr />
+                {/* =========================
+                    CLIENTE
+                ========================= */}
+
+                <section className="cliente-pedido">
+
+                  <span>
+                    Cliente
+                  </span>
+
+                  <strong>
+                    {pedido.nomeUsuario}
+                  </strong>
+
+                </section>
 
 
-        {/* STATUS */}
-        <section className="status-pedido">
-
-          <h2>Status</h2>
-
-          <div className="status-atual">
-            {status}
-          </div>
+                <hr />
 
 
-          {/* FLUXO */}
-          <div className="fluxo-status">
+                {/* =========================
+                    INFORMAÇÕES
+                ========================= */}
 
-            {statusLista.map((item, index) => (
+                <section className="info-pedido">
 
-              <div
-                key={item}
-                className="etapa"
-              >
+                  <div>
 
-                <div
-                  className={
-                    index <= statusAtual
-                      ? "bolinha ativa"
-                      : "bolinha"
-                  }
-                >
-                  {index + 1}
-                </div>
+                    <span>
+                      Horário
+                    </span>
 
-                <span
-                  className={
-                    index <= statusAtual
-                      ? "nome-status ativo"
-                      : "nome-status"
-                  }
-                >
-                  {item}
-                </span>
+                    <strong>
+                      {pedido.horario}
+                    </strong>
 
-                {index < statusLista.length - 1 && (
-                  <div
-                    className={
-                      index < statusAtual
-                        ? "linha-status preenchida"
-                        : "linha-status"
-                    }
-                  />
-                )}
-
-              </div>
-
-            ))}
-
-          </div>
+                  </div>
 
 
-          {/* BOTÃO */}
-          {status !== "Entregue" && (
+                  <div>
 
-            <button
-              className="botao-avancar"
-              onClick={avancarStatus}
-            >
-              Avançar Pedido
-            </button>
+                    <span>
+                      Posição
+                    </span>
 
-          )}
+                    <strong>
+                      #{index + 1}
+                    </strong>
+
+                  </div>
+
+                </section>
 
 
-          {/* PEDIDO ENTREGUE */}
-          {status === "Entregue" && (
+                <hr />
 
-            <div className="pedido-entregue">
 
-              <div className="check-entregue">
-                ✓
-              </div>
+                {/* =========================
+                    PRODUTOS
+                ========================= */}
 
-              <h2>
-                Pedido Entregue!
-              </h2>
+                <section className="produtos-pedido">
 
-              <p>
-                Esperando próximo pedido...
-              </p>
+                  <h2>
+                    Itens do Pedido
+                  </h2>
 
-            </div>
 
-          )}
+                  {pedido.carrinho.map(
+                    (produto, produtoIndex) => (
 
-        </section>
+                      <div
+                        className="item-pedido"
+                        key={produtoIndex}
+                      >
+
+                        <strong>
+                          {produto.quantidade}x
+                        </strong>
+
+                        <span>
+                          {produto.nome}
+                        </span>
+
+                        <strong>
+                          R$ {(
+                            produto.preco *
+                            produto.quantidade
+                          ).toFixed(2)}
+                        </strong>
+
+                      </div>
+
+                    )
+                  )}
+
+                </section>
+
+
+                <hr />
+
+
+                {/* =========================
+                    STATUS
+                ========================= */}
+
+                <section className="status-pedido">
+
+                  <h2>
+                    Status
+                  </h2>
+
+
+                  <div className="status-atual">
+
+                    {pedido.status}
+
+                  </div>
+
+
+                  {/* =========================
+                      FLUXO
+                  ========================= */}
+
+                  <div className="fluxo-status">
+
+                    {statusLista.map(
+                      (item, statusIndex) => (
+
+                        <div
+                          key={item}
+                          className="etapa"
+                        >
+
+                          <div
+                            className={
+                              statusIndex <= statusAtual
+                                ? "bolinha ativa"
+                                : "bolinha"
+                            }
+                          >
+
+                            {statusIndex + 1}
+
+                          </div>
+
+
+                          <span
+                            className={
+                              statusIndex <= statusAtual
+                                ? "nome-status ativo"
+                                : "nome-status"
+                            }
+                          >
+
+                            {item}
+
+                          </span>
+
+
+                          {statusIndex <
+                            statusLista.length - 1 && (
+
+                            <div
+                              className={
+                                statusIndex <
+                                statusAtual
+                                  ? "linha-status preenchida"
+                                  : "linha-status"
+                              }
+                            />
+
+                          )}
+
+                        </div>
+
+                      )
+                    )}
+
+                  </div>
+
+
+                  {/* =========================
+                      BOTÃO AVANÇAR
+                  ========================= */}
+
+                  {pedido.status !== "Entregue" && (
+
+                    <button
+                      className="botao-avancar"
+                      onClick={() =>
+                        avancarStatus(
+                          pedido.id
+                        )
+                      }
+                    >
+                      Avançar Pedido
+                    </button>
+
+                  )}
+
+
+                  {/* =========================
+                      PEDIDO ENTREGUE
+                  ========================= */}
+
+                  {pedido.status === "Entregue" && (
+
+                    <div className="pedido-entregue">
+
+                      <div className="check-entregue">
+                        ✓
+                      </div>
+
+
+                      <h2>
+                        Pedido Entregue!
+                      </h2>
+
+
+                      <p>
+                        Cliente:{" "}
+                        {pedido.nomeUsuario}
+                      </p>
+
+
+                      <button
+                        className="botao-remover"
+                        onClick={() =>
+                          removerPedido(
+                            pedido.id
+                          )
+                        }
+                      >
+                        Remover da fila
+                      </button>
+
+                    </div>
+
+                  )}
+
+                </section>
+
+              </article>
+
+            );
+
+          })
+
+        )}
 
       </main>
 
     </div>
+
   );
+
 }
 
 export default Pedido;

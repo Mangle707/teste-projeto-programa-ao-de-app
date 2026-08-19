@@ -1,11 +1,10 @@
-* * {
+* {
   box-sizing: border-box;
 }
 
-/* FUNDO SOMENTE DA PÁGINA DE PEDIDO */
-
 .pagina-pedido {
   min-height: 100vh;
+  padding: 25px;
 
   background:
     linear-gradient(
@@ -17,413 +16,588 @@
 
   background-size: cover;
   background-attachment: fixed;
-
-  padding: 30px;
 }
-  
-  /* CABEÇALHO */
-  
-  .cabecalho-pedido {
-    max-width: 1000px;
-  
-    margin: 0 auto 25px;
-  
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  
-    color: white;
-  }
-  
-  .cabecalho-pedido h1 {
-    margin: 0;
-  
-    font-size: 38px;
-    font-weight: 900;
-    color: white;
-  }
-  
-  .cabecalho-pedido p {
-    margin-top: 5px;
-  
-    font-size: 18px;
-  
-    color: #ccc;
-  }
-  
-  .voltar-carrinho {
-    background-color: #f5c400;
-  
-    color: #000;
-  
-    padding: 13px 22px;
-  
-    border-radius: 8px;
-  
-    text-decoration: none;
-  
-    font-weight: bold;
-  }
-  
-  
-  /* CARD DO PEDIDO */
-  
-  .pedido {
-    max-width: 1000px;
-  
-    margin: auto;
-  
-    background-color: white;
-  
-    border-radius: 15px;
-  
-    padding: 40px;
-  
-    box-shadow:
-      0 8px 25px rgba(0, 0, 0, 0.5);
-  }
-  
-  
-  /* INFORMAÇÕES */
-  
-  .info-pedido {
-    display: flex;
-  
-    justify-content: space-between;
-  
-    margin-bottom: 25px;
-  }
-  
-  .info-pedido div {
-    display: flex;
-  
-    flex-direction: column;
-  
-    gap: 5px;
-  }
-  
-  .info-pedido span {
-    font-size: 18px;
-  
-    color: #666;
-  
-    font-weight: bold;
-  }
-  
-  .info-pedido strong {
-    font-size: 32px;
-  }
-  
-  
-  /* LINHAS */
-  
-  .pedido hr {
-    border: none;
-  
-    border-top: 2px solid #222;
-  
-    margin: 25px 0;
-  }
-  
-  
-  /* PRODUTOS */
-  
-  .produtos-pedido h2 {
-    font-size: 25px;
-  
-    margin-bottom: 20px;
-  }
-  
-  .item-pedido {
-    display: flex;
-  
-    align-items: center;
-  
-    gap: 25px;
-  
-    font-size: 30px;
-  
-    padding: 15px 0;
-  
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .item-pedido strong {
-    min-width: 70px;
-  
-    font-size: 32px;
-  }
-  
-  .item-pedido span {
-    font-weight: bold;
-  }
-  
-  
-  /* ENDEREÇO */
-  
-  .endereco {
-    font-size: 16px;
-  
-    color: #333;
-  
-    line-height: 1.6;
-  }
-  
-  .endereco strong {
-    font-size: 20px;
-  }
-  
-  .endereco p {
-    margin: 5px 0;
-  }
-  
-  
-  /* STATUS */
-  
-  .status-pedido {
-    text-align: center;
-  }
-  
-  .status-pedido h2 {
-    font-size: 30px;
-  
-    margin-bottom: 15px;
-  }
-  
-  
-  /* STATUS ATUAL */
-  
-  .status-atual {
-    display: inline-block;
-  
-    padding: 15px 35px;
-  
-    background-color: #f5c400;
-  
-    color: #000;
-  
-    border-radius: 10px;
-  
-    font-size: 28px;
-  
-    font-weight: 900;
-  
-    margin-bottom: 40px;
-  }
-  
-  
-  /* FLUXO */
-  
-  .fluxo-status {
-    display: flex;
-  
-    align-items: flex-start;
-  
-    justify-content: center;
-  
-    width: 100%;
-  
-    margin-bottom: 35px;
-  }
-  
-  .etapa {
-    display: flex;
-  
-    align-items: center;
-  
-    position: relative;
-  }
-  
-  
-  /* BOLINHA */
-  
-  .bolinha {
-    width: 55px;
-    height: 55px;
-  
-    border-radius: 50%;
-  
-    background-color: #ddd;
-  
-    color: #777;
-  
-    display: flex;
-  
-    align-items: center;
-    justify-content: center;
-  
-    font-size: 20px;
-  
-    font-weight: bold;
-  }
-  
-  .bolinha.ativa {
-    background-color: #f5c400;
-  
-    color: #000;
-  }
-  
-  
-  /* NOME */
-  
-  .nome-status {
-    position: absolute;
-  
-    top: 65px;
-  
-    left: 50%;
-  
-    transform: translateX(-50%);
-  
-    white-space: nowrap;
-  
-    color: #777;
-  
-    font-weight: bold;
-  
-    font-size: 16px;
-  }
-  
-  .nome-status.ativo {
-    color: #000;
-  }
-  
-  
-  /* LINHA */
-  
-  .linha-status {
-    width: 100px;
-  
-    height: 5px;
-  
-    background-color: #ddd;
-  
-    margin: 0 8px;
-  }
-  
-  .linha-status.preenchida {
-    background-color: #f5c400;
-  }
-  
-  
-  /* BOTÃO */
-  
-  .botao-avancar {
-    margin-top: 50px;
-  
-    padding: 17px 35px;
-  
-    border: none;
-  
-    border-radius: 10px;
-  
-    background-color: #000;
-  
-    color: white;
-  
-    font-size: 20px;
-  
-    font-weight: bold;
-  
-    cursor: pointer;
-  }
-  
-  .botao-avancar:hover {
-    background-color: #333;
-  }
-  
-  
-  /* ENTREGUE */
-  
-  .pedido-entregue {
-    margin-top: 50px;
-  
-    padding: 30px;
-  
-    background-color: #222;
-  
-    color: white;
-  
-    border-radius: 10px;
-  
-    text-align: center;
-  
-    font-size: 22px;
-  
-    font-weight: bold;
-  }
-  
-  .check-entregue {
-    width: 60px;
-    height: 60px;
-  
-    margin: 0 auto 10px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    border-radius: 50%;
-  
-    background-color: #ffd000;
-  
-    color: #000;
-  
-    font-size: 35px;
-  
-    font-weight: bold;
-  }
-  
-  .pedido-entregue h2 {
-    margin: 10px 0;
-  
-    color: #ffd000;
-  }
-  
-  .pedido-entregue p {
-    margin: 10px 0 0;
-  
-    color: #ddd;
-  
-    font-size: 18px;
-  
-    font-weight: normal;
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.cabecalho-pedido {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+}
+
+.cabecalho-pedido h1 {
+  margin: 0;
+
+  font-size: 32px;
+  font-weight: 900;
+
+  color: white;
+}
+
+.cabecalho-pedido p {
+  margin: 4px 0 0;
+
+  color: #ccc;
+}
+
+
+/* BOTÃO VOLTAR */
+
+.voltar-carrinho {
+  background: #f5c400;
+
+  color: #000;
+
+  padding: 10px 18px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-weight: bold;
+}
+
+
+/* ========================================
+   FILA
+======================================== */
+
+.fila-pedidos {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 20px;
+
+  align-items: start;
+}
+
+
+/* ========================================
+   CARD DO PEDIDO
+======================================== */
+
+.pedido {
+  width: 100%;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 22px;
+
+  border-left: 6px solid #f5c400;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+
+/* ========================================
+   TOPO DO PEDIDO
+======================================== */
+
+.topo-pedido {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.topo-pedido h1 {
+  margin: 0;
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  color: #111;
+}
+
+.topo-pedido p {
+  margin: 3px 0 0;
+
+  font-size: 13px;
+
+  color: #666;
+}
+
+
+/* ========================================
+   POSIÇÃO NA FILA
+======================================== */
+
+.posicao-fila {
+  min-width: 60px;
+
+  padding: 6px 10px;
+
+  border-radius: 7px;
+
+  background: #f5c400;
+
+  color: #000;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.posicao-fila span {
+  font-size: 10px;
+
+  font-weight: bold;
+}
+
+.posicao-fila strong {
+  font-size: 20px;
+}
+
+
+/* ========================================
+   CLIENTE
+======================================== */
+
+.cliente-pedido {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-top: 15px;
+
+  gap: 2px;
+}
+
+.cliente-pedido span {
+  color: #666;
+
+  font-size: 12px;
+
+  font-weight: bold;
+}
+
+.cliente-pedido strong {
+  font-size: 19px;
+
+  color: #111;
+}
+
+
+/* ========================================
+   LINHAS
+======================================== */
+
+.pedido hr {
+  border: none;
+
+  border-top: 1px solid #ddd;
+
+  margin: 15px 0;
+}
+
+
+/* ========================================
+   INFORMAÇÕES
+======================================== */
+
+.info-pedido {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin: 0;
+}
+
+.info-pedido div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.info-pedido span {
+  color: #666;
+
+  font-size: 12px;
+
+  font-weight: bold;
+}
+
+.info-pedido strong {
+  font-size: 18px;
+
+  color: #111;
+}
+
+
+/* ========================================
+   PRODUTOS
+======================================== */
+
+.produtos-pedido h2 {
+  margin: 0 0 10px;
+
+  font-size: 19px;
+
+  color: #111;
+}
+
+.item-pedido {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 7px 0;
+
+  border-bottom: 1px solid #eee;
+
+  font-size: 16px;
+}
+
+.item-pedido strong {
+  min-width: 35px;
+
+  font-size: 16px;
+}
+
+.item-pedido span {
+  flex: 1;
+
+  font-weight: bold;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.status-pedido {
+  text-align: center;
+}
+
+.status-pedido h2 {
+  margin: 0 0 10px;
+
+  font-size: 20px;
+}
+
+.status-atual {
+  display: inline-block;
+
+  padding: 8px 18px;
+
+  background: #f5c400;
+
+  color: #000;
+
+  border-radius: 7px;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  margin-bottom: 25px;
+}
+
+
+/* ========================================
+   FLUXO
+======================================== */
+
+.fluxo-status {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 100%;
+
+  margin-bottom: 25px;
+}
+
+.etapa {
+  display: flex;
+
+  align-items: center;
+
+  position: relative;
+}
+
+
+/* BOLINHA */
+
+.bolinha {
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #ddd;
+
+  color: #777;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 14px;
+
+  font-weight: bold;
+}
+
+.bolinha.ativa {
+  background: #f5c400;
+
+  color: #000;
+}
+
+
+/* NOME STATUS */
+
+.nome-status {
+  position: absolute;
+
+  top: 45px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  color: #777;
+
+  font-size: 10px;
+
+  font-weight: bold;
+}
+
+.nome-status.ativo {
+  color: #000;
+}
+
+
+/* LINHA */
+
+.linha-status {
+  width: 35px;
+
+  height: 4px;
+
+  background: #ddd;
+
+  margin: 0 4px;
+}
+
+.linha-status.preenchida {
+  background: #f5c400;
+}
+
+
+/* ========================================
+   BOTÃO AVANÇAR
+======================================== */
+
+.botao-avancar {
+  margin-top: 35px;
+
+  width: 100%;
+
+  padding: 11px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #000;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.botao-avancar:hover {
+  background: #333;
+}
+
+
+/* ========================================
+   PEDIDO ENTREGUE
+======================================== */
+
+.pedido-entregue {
+  margin-top: 25px;
+
+  padding: 18px;
+
+  background: #222;
+
+  color: white;
+
+  border-radius: 8px;
+
+  text-align: center;
+}
+
+.check-entregue {
+  width: 45px;
+
+  height: 45px;
+
+  margin: 0 auto 8px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffd000;
+
+  color: #000;
+
+  font-size: 25px;
+
+  font-weight: bold;
+}
+
+.pedido-entregue h2 {
+  margin: 5px 0;
+
+  color: #ffd000;
+}
+
+.pedido-entregue p {
+  margin: 5px 0;
+
+  color: #ddd;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   BOTÃO REMOVER
+======================================== */
+
+.botao-remover {
+  margin-top: 12px;
+
+  padding: 9px 15px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #f5c400;
+
+  color: #000;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   NENHUM PEDIDO
+======================================== */
+
+.sem-pedidos {
+  grid-column: 1 / -1;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  padding: 40px;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  border: 2px solid #f5c400;
+}
+
+.sem-pedidos h2 {
+  margin: 0 0 8px;
+
+  color: white;
+  
+  font-size: 28px;
+}
+
+.sem-pedidos p {
+  margin: 0;
+
+  color: white;
+
+  font-size: 18px;
+}
+
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 700px) {
+
+  .pagina-pedido {
+    padding: 15px;
   }
 
-  
-  /* RESPONSIVO */
-  
-  @media (max-width: 700px) {
-  
-    .pagina-pedido {
-      padding: 15px;
-      
-    }
-  
-    .pedido {
-      padding: 25px 20px;
-      
-    }
-  
-    .cabecalho-pedido h1 {
-      font-size: 26px;
-      
-    }
-  
-    .fluxo-status {
-      flex-direction: column;
-  
-      align-items: center;
-  
-      gap: 50px;
-    }
-  
-    .linha-status {
-      display: none;
-    }
-  
-    .item-pedido {
-      font-size: 22px;
-    }
-  
+  .cabecalho-pedido {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
   }
+
+  .cabecalho-pedido h1 {
+    font-size: 26px;
+  }
+
+  .fila-pedidos {
+    grid-template-columns: 1fr;
+  }
+
+  .pedido {
+    padding: 18px;
+  }
+
+  .fluxo-status {
+    transform: scale(0.9);
+  }
+
+}

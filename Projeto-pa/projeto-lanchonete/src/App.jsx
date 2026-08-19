@@ -5,89 +5,207 @@ import Home from "./pages/Home";
 import Carrinho from "./pages/Carrinho";
 import Pedido from "./pages/Pedido";
 import Login from "./pages/Login";
-import EsqueciSenha from "./pages/EsqueciSenha";
+
 
 function App() {
 
   const [carrinho, setCarrinho] = useState([]);
 
-  // Verifica se já estava logado
+
+  // =========================
+  // LOGIN
+  // =========================
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("login") === "true"
   );
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("login", "true");
-  };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  // =========================
+  // TIPO DE USUÁRIO
+  // =========================
+
+  const [tipoUsuario, setTipoUsuario] = useState(
+    localStorage.getItem("tipoUsuario") || ""
+  );
+
+
+  // =========================
+  // NOME DO USUÁRIO
+  // =========================
+
+  const [usuario, setUsuario] = useState(
+    localStorage.getItem("nomeUsuario") || ""
+  );
+
+
+  // =========================
+  // LOGIN
+  // =========================
+
+  function handleLogin(tipo, nome) {
+
+    localStorage.setItem(
+      "login",
+      "true"
+    );
+
+    localStorage.setItem(
+      "tipoUsuario",
+      tipo
+    );
+
+    localStorage.setItem(
+      "nomeUsuario",
+      nome
+    );
+
+
+    setIsLoggedIn(true);
+
+    setTipoUsuario(tipo);
+
+    setUsuario(nome);
+
+  }
+
+
+  // =========================
+  // LOGOUT
+  // =========================
+
+  function handleLogout() {
+
     localStorage.removeItem("login");
-  };
+
+    localStorage.removeItem("tipoUsuario");
+
+    localStorage.removeItem("nomeUsuario");
+
+
+    setIsLoggedIn(false);
+
+    setTipoUsuario("");
+
+    setUsuario("");
+
+  }
+
 
   return (
+
     <Routes>
 
-      {/* LOGIN */}
+
+      {/* =========================
+          LOGIN
+      ========================= */}
+
       <Route
         path="/login"
         element={
-          <Login onLogin={handleLogin} />
+          <Login
+            onLogin={handleLogin}
+          />
         }
       />
-      {/*ESQUECI SENHA*/}
-      <Route
-        path="/esqueci-senha"
-         element={<EsqueciSenha />}
-       />
 
-      {/* HOME */}
+
+      {/* =========================
+          HOME - CLIENTE
+      ========================= */}
+
       <Route
         path="/"
         element={
-          isLoggedIn ? (
-            <Home
-              carrinho={carrinho}
-              setCarrinho={setCarrinho}
-              onLogout={handleLogout}
-            />
-          ) : (
-            <Navigate to="/login" />
-          )
+
+          isLoggedIn &&
+          tipoUsuario === "cliente"
+
+            ?
+
+          <Home
+            usuario={usuario}
+            carrinho={carrinho}
+            setCarrinho={setCarrinho}
+            onLogout={handleLogout}
+          />
+
+            :
+
+          <Navigate to="/login" />
+
         }
       />
 
-      {/* CARRINHO */}
+
+      {/* =========================
+          CARRINHO - CLIENTE
+      ========================= */}
+
       <Route
         path="/carrinho"
         element={
-          isLoggedIn ? (
-            <Carrinho
-              carrinho={carrinho}
-              setCarrinho={setCarrinho}
-            />
-          ) : (
-            <Navigate to="/login" />
-          )
+
+          isLoggedIn &&
+          tipoUsuario === "cliente"
+
+            ?
+
+          <Carrinho
+            carrinho={carrinho}
+            setCarrinho={setCarrinho}
+          />
+
+            :
+
+          <Navigate to="/login" />
+
         }
       />
 
-      {/* PEDIDO */}
+
+      {/* =========================
+          PEDIDO - FUNCIONÁRIO
+      ========================= */}
+
       <Route
         path="/pedido"
         element={
-          isLoggedIn ? (
-            <Pedido carrinho={carrinho} />
-          ) : (
-            <Navigate to="/login" />
-          )
+
+          isLoggedIn &&
+          tipoUsuario === "funcionario"
+
+            ?
+
+          <Pedido
+            carrinho={carrinho}
+          />
+
+            :
+
+          <Navigate to="/login" />
+
         }
       />
 
 
+      {/* =========================
+          ROTA INVÁLIDA
+      ========================= */}
+
+      <Route
+        path="*"
+        element={
+          <Navigate to="/login" />
+        }
+      />
+
     </Routes>
+
   );
+
 }
+
 
 export default App;
