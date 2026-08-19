@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.css";
 
+
 function Login({ onLogin }) {
 
   const [isVisible, setIsVisible] = useState(false);
@@ -12,15 +13,15 @@ function Login({ onLogin }) {
 
   const [senha, setSenha] = useState("");
 
-  // Controla se está no Login ou Criar Conta
+  // Controla Login ou Criar Conta
   const [criandoConta, setCriandoConta] = useState(false);
 
   const navigate = useNavigate();
 
 
-  // =========================
+  // ========================================
   // ANIMAÇÃO
-  // =========================
+  // ========================================
 
   useEffect(() => {
 
@@ -29,9 +30,9 @@ function Login({ onLogin }) {
   }, []);
 
 
-  // =========================
+  // ========================================
   // USUÁRIOS PADRÃO
-  // =========================
+  // ========================================
 
   const usuariosPadrao = [
 
@@ -50,16 +51,14 @@ function Login({ onLogin }) {
   ];
 
 
-  // =========================
+  // ========================================
   // CRIAR CONTA
-  // =========================
+  // ========================================
 
   const criarConta = (e) => {
 
     e.preventDefault();
 
-
-    // Verifica tipo
 
     if (!tipoUsuario) {
 
@@ -72,8 +71,6 @@ function Login({ onLogin }) {
     }
 
 
-    // Verifica nome
-
     if (!nomeUsuario.trim()) {
 
       alert(
@@ -84,8 +81,6 @@ function Login({ onLogin }) {
 
     }
 
-
-    // Verifica senha
 
     if (!senha.trim()) {
 
@@ -98,31 +93,19 @@ function Login({ onLogin }) {
     }
 
 
-    // =========================
-    // BUSCA USUÁRIOS SALVOS
-    // =========================
-
     const usuariosSalvos =
       JSON.parse(
         localStorage.getItem("usuarios")
       ) || [];
 
 
-    // Junta usuários padrão
-    // e usuários criados
-
     const todosUsuarios = [
 
       ...usuariosPadrao,
-
       ...usuariosSalvos
 
     ];
 
-
-    // =========================
-    // VERIFICA SE JÁ EXISTE
-    // =========================
 
     const usuarioExiste =
       todosUsuarios.some(
@@ -146,10 +129,6 @@ function Login({ onLogin }) {
     }
 
 
-    // =========================
-    // CRIA NOVO USUÁRIO
-    // =========================
-
     const novoUsuario = {
 
       nome:
@@ -164,10 +143,6 @@ function Login({ onLogin }) {
     };
 
 
-    // =========================
-    // SALVA USUÁRIO
-    // =========================
-
     usuariosSalvos.push(
       novoUsuario
     );
@@ -181,18 +156,10 @@ function Login({ onLogin }) {
     );
 
 
-    // =========================
-    // MENSAGEM
-    // =========================
-
     alert(
       "Conta criada com sucesso!"
     );
 
-
-    // =========================
-    // VOLTA PARA LOGIN
-    // =========================
 
     setCriandoConta(false);
 
@@ -205,16 +172,14 @@ function Login({ onLogin }) {
   };
 
 
-  // =========================
-  // FAZER LOGIN
-  // =========================
+  // ========================================
+  // LOGIN
+  // ========================================
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
 
-
-    // Verifica tipo
 
     if (!tipoUsuario) {
 
@@ -227,8 +192,6 @@ function Login({ onLogin }) {
     }
 
 
-    // Verifica nome
-
     if (!nomeUsuario.trim()) {
 
       alert(
@@ -239,8 +202,6 @@ function Login({ onLogin }) {
 
     }
 
-
-    // Verifica senha
 
     if (!senha.trim()) {
 
@@ -253,30 +214,19 @@ function Login({ onLogin }) {
     }
 
 
-    // =========================
-    // BUSCA USUÁRIOS CRIADOS
-    // =========================
-
     const usuariosSalvos =
       JSON.parse(
         localStorage.getItem("usuarios")
       ) || [];
 
 
-    // Junta os usuários
-
     const todosUsuarios = [
 
       ...usuariosPadrao,
-
       ...usuariosSalvos
 
     ];
 
-
-    // =========================
-    // PROCURA USUÁRIO
-    // =========================
 
     const usuarioEncontrado =
       todosUsuarios.find(
@@ -297,10 +247,6 @@ function Login({ onLogin }) {
       );
 
 
-    // =========================
-    // LOGIN INCORRETO
-    // =========================
-
     if (!usuarioEncontrado) {
 
       alert(
@@ -312,9 +258,9 @@ function Login({ onLogin }) {
     }
 
 
-    // =========================
+    // ========================================
     // SALVA LOGIN
-    // =========================
+    // ========================================
 
     localStorage.setItem(
       "login",
@@ -332,17 +278,15 @@ function Login({ onLogin }) {
     );
 
 
-    // Atualiza o App
-
     onLogin(
       tipoUsuario,
       usuarioEncontrado.nome
     );
 
 
-    // =========================
+    // ========================================
     // FUNCIONÁRIO
-    // =========================
+    // ========================================
 
     if (
       tipoUsuario === "funcionario"
@@ -353,13 +297,13 @@ function Login({ onLogin }) {
     }
 
 
-    // =========================
+    // ========================================
     // CLIENTE
-    // =========================
+    // ========================================
 
     else {
 
-      navigate("/");
+      navigate("/home");
 
     }
 
@@ -376,10 +320,6 @@ function Login({ onLogin }) {
       }`}
     >
 
-
-      {/* =========================
-          PIXELS
-      ========================= */}
 
       <div className={styles.pixels}>
 
@@ -399,14 +339,8 @@ function Login({ onLogin }) {
       </div>
 
 
-      {/* =========================
-          CAIXA
-      ========================= */}
-
       <div className={styles["login-box"]}>
 
-
-        {/* LOGO */}
 
         <img
           src="/IMG/Icone.png"
@@ -415,18 +349,12 @@ function Login({ onLogin }) {
         />
 
 
-        {/* TÍTULO */}
-
         <h1 className={styles["login-title"]}>
 
           Danger Hamburgers
 
         </h1>
 
-
-        {/* =========================
-            TÍTULO DA TELA
-        ========================= */}
 
         <h2>
 
@@ -437,9 +365,9 @@ function Login({ onLogin }) {
         </h2>
 
 
-        {/* =========================
+        {/* ========================================
             TIPO DE USUÁRIO
-        ========================= */}
+        ======================================== */}
 
         <div className={styles["tipo-usuario"]}>
 
@@ -485,9 +413,9 @@ function Login({ onLogin }) {
         </div>
 
 
-        {/* =========================
+        {/* ========================================
             FORMULÁRIO
-        ========================= */}
+        ======================================== */}
 
         <form
           onSubmit={
@@ -498,12 +426,9 @@ function Login({ onLogin }) {
         >
 
 
-          {/* USUÁRIO */}
-
           <input
             type="text"
             name="usuario"
-
             placeholder="Usuário"
 
             value={nomeUsuario}
@@ -518,12 +443,9 @@ function Login({ onLogin }) {
           />
 
 
-          {/* SENHA */}
-
           <input
             type="password"
             name="senha"
-
             placeholder="Senha"
 
             value={senha}
@@ -538,10 +460,6 @@ function Login({ onLogin }) {
           />
 
 
-          {/* =========================
-              BOTÃO PRINCIPAL
-          ========================= */}
-
           <button type="submit">
 
             {criandoConta
@@ -551,14 +469,13 @@ function Login({ onLogin }) {
           </button>
 
 
-          {/* =========================
+          {/* ========================================
               LOGIN
-          ========================= */}
+          ======================================== */}
 
           {!criandoConta && (
 
             <>
-
 
               <Link
                 to="/esqueci-senha"
@@ -571,8 +488,6 @@ function Login({ onLogin }) {
 
               </Link>
 
-
-              {/* CRIAR CONTA */}
 
               <button
                 type="button"
@@ -604,15 +519,14 @@ function Login({ onLogin }) {
 
               </button>
 
-
             </>
 
           )}
 
 
-          {/* =========================
+          {/* ========================================
               VOLTAR PARA LOGIN
-          ========================= */}
+          ======================================== */}
 
           {criandoConta && (
 

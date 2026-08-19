@@ -12,43 +12,32 @@ function App() {
   const [carrinho, setCarrinho] = useState([]);
 
 
-  // =========================
   // LOGIN
-  // =========================
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("login") === "true"
   );
 
 
-  // =========================
   // TIPO DE USUÁRIO
-  // =========================
 
   const [tipoUsuario, setTipoUsuario] = useState(
     localStorage.getItem("tipoUsuario") || ""
   );
 
 
-  // =========================
-  // NOME DO USUÁRIO
-  // =========================
+  // NOME
 
   const [usuario, setUsuario] = useState(
     localStorage.getItem("nomeUsuario") || ""
   );
 
 
-  // =========================
   // LOGIN
-  // =========================
 
   function handleLogin(tipo, nome) {
 
-    localStorage.setItem(
-      "login",
-      "true"
-    );
+    localStorage.setItem("login", "true");
 
     localStorage.setItem(
       "tipoUsuario",
@@ -70,9 +59,7 @@ function App() {
   }
 
 
-  // =========================
   // LOGOUT
-  // =========================
 
   function handleLogout() {
 
@@ -99,24 +86,44 @@ function App() {
 
       {/* =========================
           LOGIN
+          AGORA É /
       ========================= */}
 
       <Route
-        path="/login"
+        path="/"
         element={
-          <Login
-            onLogin={handleLogin}
-          />
+
+          isLoggedIn
+
+            ? (
+
+              tipoUsuario === "cliente"
+
+                ? <Navigate to="/home" />
+
+                : <Navigate to="/pedido" />
+
+            )
+
+            : (
+
+              <Login
+                onLogin={handleLogin}
+              />
+
+            )
+
         }
       />
 
 
       {/* =========================
-          HOME - CLIENTE
+          HOME
+          AGORA É /home
       ========================= */}
 
       <Route
-        path="/"
+        path="/home"
         element={
 
           isLoggedIn &&
@@ -133,14 +140,14 @@ function App() {
 
             :
 
-          <Navigate to="/login" />
+          <Navigate to="/" />
 
         }
       />
 
 
       {/* =========================
-          CARRINHO - CLIENTE
+          CARRINHO
       ========================= */}
 
       <Route
@@ -159,14 +166,14 @@ function App() {
 
             :
 
-          <Navigate to="/login" />
+          <Navigate to="/" />
 
         }
       />
 
 
       {/* =========================
-          PEDIDO - FUNCIONÁRIO
+          PEDIDOS
       ========================= */}
 
       <Route
@@ -184,7 +191,7 @@ function App() {
 
             :
 
-          <Navigate to="/login" />
+          <Navigate to="/" />
 
         }
       />
@@ -197,7 +204,7 @@ function App() {
       <Route
         path="*"
         element={
-          <Navigate to="/login" />
+          <Navigate to="/" />
         }
       />
 

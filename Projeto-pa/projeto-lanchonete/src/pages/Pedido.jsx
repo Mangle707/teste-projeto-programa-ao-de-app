@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Pedido.css";
+
 
 function Pedido({ carrinho }) {
 
-  const [pedidos, setPedidos] = useState([]);
+  const [pedidos, setPedidos] =
+    useState([]);
+
 
   // ========================================
   // STATUS
@@ -74,23 +76,30 @@ function Pedido({ carrinho }) {
   // FECHAR
   // ========================================
 
-  const fecharPedido = (e) => {
+  const fecharPedido = () => {
 
-    const confirmar = window.confirm(
-      "Deseja sair e voltar ao login?"
-    );
+    const confirmar =
+      window.confirm(
+        "Deseja sair e voltar ao login?"
+      );
 
+
+    // Se clicar em CANCELAR
 
     if (!confirmar) {
-
-      e.preventDefault();
 
       return;
 
     }
 
 
-    localStorage.removeItem("login");
+    // ========================================
+    // REMOVE LOGIN
+    // ========================================
+
+    localStorage.removeItem(
+      "login"
+    );
 
     localStorage.removeItem(
       "tipoUsuario"
@@ -99,6 +108,13 @@ function Pedido({ carrinho }) {
     localStorage.removeItem(
       "nomeUsuario"
     );
+
+
+    // ========================================
+    // VOLTA PARA LOGIN /
+    // ========================================
+
+    window.location.href = "/";
 
   };
 
@@ -130,12 +146,6 @@ function Pedido({ carrinho }) {
     if (
       pedidoAtual.status === "Pronto"
     ) {
-
-
-      /*
-        O pedido é considerado entregue
-        e retirado da fila.
-      */
 
       const confirmar =
         window.confirm(
@@ -279,11 +289,11 @@ function Pedido({ carrinho }) {
     <div className="pagina-pedido">
 
 
-      {/* ========================================
-          CABEÇALHO
-      ======================================== */}
+      {/* CABEÇALHO */}
 
-      <header className="cabecalho-pedido">
+      <header
+        className="cabecalho-pedido"
+      >
 
         <div>
 
@@ -300,22 +310,20 @@ function Pedido({ carrinho }) {
 
         {/* FECHAR */}
 
-        <Link
-          to="/login"
+        <button
+          type="button"
           className="voltar-carrinho"
           onClick={fecharPedido}
         >
 
           Fechar
 
-        </Link>
+        </button>
 
       </header>
 
 
-      {/* ========================================
-          FILA
-      ======================================== */}
+      {/* FILA */}
 
       <main className="fila-pedidos">
 
@@ -336,9 +344,7 @@ function Pedido({ carrinho }) {
 
         ) : (
 
-
           <div className="lista-pedidos">
-
 
             {pedidos.map(
               (pedido, index) => {
@@ -359,7 +365,6 @@ function Pedido({ carrinho }) {
                       index
                     }
                   >
-
 
                     {/* TOPO */}
 
@@ -392,9 +397,9 @@ function Pedido({ carrinho }) {
                       </div>
 
 
-                      {/* POSIÇÃO */}
-
-                      <span className="posicao-fila">
+                      <span
+                        className="posicao-fila"
+                      >
 
                         #{index + 1}
 
@@ -454,7 +459,6 @@ function Pedido({ carrinho }) {
 
                               </strong>
 
-
                               <span>
 
                                 {
@@ -471,7 +475,9 @@ function Pedido({ carrinho }) {
 
                       ) : (
 
-                        <div className="item-card">
+                        <div
+                          className="item-card"
+                        >
 
                           <span>
                             Nenhum item
@@ -493,7 +499,9 @@ function Pedido({ carrinho }) {
                       </h3>
 
 
-                      <div className="status-atual">
+                      <div
+                        className="status-atual"
+                      >
 
                         {
                           pedido.status ||
@@ -554,9 +562,7 @@ function Pedido({ carrinho }) {
                       </div>
 
 
-                      {/* ========================================
-                          BOTÃO
-                      ======================================== */}
+                      {/* BOTÃO */}
 
                       <button
                         className="botao-avancar"
@@ -577,16 +583,13 @@ function Pedido({ carrinho }) {
 
                       </button>
 
-
                     </div>
-
 
                   </div>
 
                 );
 
               }
-
             )}
 
           </div>

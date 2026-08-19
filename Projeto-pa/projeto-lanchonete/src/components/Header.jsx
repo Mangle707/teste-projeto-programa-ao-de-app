@@ -60,7 +60,7 @@ function Header({
       <nav className="menu">
 
 
-        <Link to="/">
+        <Link to="/home">
           Home
         </Link>
 
