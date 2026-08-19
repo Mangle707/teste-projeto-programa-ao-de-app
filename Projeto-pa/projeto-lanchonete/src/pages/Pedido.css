@@ -2,8 +2,14 @@
   box-sizing: border-box;
 }
 
+
+/* ========================================
+   PÁGINA
+======================================== */
+
 .pagina-pedido {
   min-height: 100vh;
+
   padding: 25px;
 
   background:
@@ -15,6 +21,7 @@
     no-repeat center center;
 
   background-size: cover;
+
   background-attachment: fixed;
 }
 
@@ -25,32 +32,42 @@
 
 .cabecalho-pedido {
   max-width: 1200px;
+
   margin: 0 auto 20px;
 
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   color: white;
 }
 
+
 .cabecalho-pedido h1 {
   margin: 0;
 
   font-size: 32px;
+
   font-weight: 900;
 
   color: white;
 }
 
+
 .cabecalho-pedido p {
   margin: 4px 0 0;
 
   color: #ccc;
+
+  font-size: 14px;
 }
 
 
-/* BOTÃO VOLTAR */
+/* ========================================
+   BOTÃO FECHAR
+======================================== */
 
 .voltar-carrinho {
   background: #f5c400;
@@ -64,24 +81,43 @@
   text-decoration: none;
 
   font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.voltar-carrinho:hover {
+  background: #ffd633;
+
+  transform: scale(1.03);
 }
 
 
 /* ========================================
-   FILA
+   FILA DE PEDIDOS
 ======================================== */
 
 .fila-pedidos {
   max-width: 1200px;
 
   margin: 0 auto;
+}
+
+
+/* ========================================
+   LISTA DE PEDIDOS
+======================================== */
+
+.lista-pedidos {
 
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(320px, 1fr));
+    repeat(auto-fit, minmax(280px, 1fr));
 
-  gap: 20px;
+  gap: 18px;
 
   align-items: start;
 }
@@ -91,52 +127,87 @@
    CARD DO PEDIDO
 ======================================== */
 
-.pedido {
+.card-pedido {
+
   width: 100%;
+
+  max-width: 350px;
+
+  margin: 0 auto;
 
   background: white;
 
   border-radius: 12px;
 
-  padding: 22px;
+  padding: 18px;
 
   border-left: 6px solid #f5c400;
 
   box-shadow:
     0 6px 18px rgba(0, 0, 0, 0.45);
+
+  animation: aparecerPedido 0.3s ease;
+}
+
+
+@keyframes aparecerPedido {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
 }
 
 
 /* ========================================
-   TOPO DO PEDIDO
+   TOPO DO CARD
 ======================================== */
 
-.topo-pedido {
+.topo-card {
+
   display: flex;
 
   justify-content: space-between;
 
-  align-items: center;
+  align-items: flex-start;
 
   gap: 10px;
 }
 
-.topo-pedido h1 {
+
+.topo-card h2 {
+
   margin: 0;
 
-  font-size: 22px;
+  font-size: 20px;
 
   font-weight: 900;
 
   color: #111;
 }
 
-.topo-pedido p {
-  margin: 3px 0 0;
 
-  font-size: 13px;
+.topo-card strong {
 
-  color: #666;
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 16px;
+
+  color: #333;
 }
 
 
@@ -145,73 +216,26 @@
 ======================================== */
 
 .posicao-fila {
-  min-width: 60px;
 
-  padding: 6px 10px;
+  min-width: 42px;
 
-  border-radius: 7px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 8px;
 
   background: #f5c400;
 
   color: #000;
 
-  text-align: center;
+  font-size: 17px;
 
-  display: flex;
-
-  flex-direction: column;
-}
-
-.posicao-fila span {
-  font-size: 10px;
-
-  font-weight: bold;
-}
-
-.posicao-fila strong {
-  font-size: 20px;
-}
-
-
-/* ========================================
-   CLIENTE
-======================================== */
-
-.cliente-pedido {
-  display: flex;
-
-  flex-direction: column;
-
-  margin-top: 15px;
-
-  gap: 2px;
-}
-
-.cliente-pedido span {
-  color: #666;
-
-  font-size: 12px;
-
-  font-weight: bold;
-}
-
-.cliente-pedido strong {
-  font-size: 19px;
-
-  color: #111;
-}
-
-
-/* ========================================
-   LINHAS
-======================================== */
-
-.pedido hr {
-  border: none;
-
-  border-top: 1px solid #ddd;
-
-  margin: 15px 0;
+  font-weight: 900;
 }
 
 
@@ -219,23 +243,26 @@
    INFORMAÇÕES
 ======================================== */
 
-.info-pedido {
+.info-card {
+
   display: flex;
 
   justify-content: space-between;
 
-  margin: 0;
+  align-items: center;
+
+  margin-top: 12px;
+
+  padding: 8px 0;
+
+  border-top: 1px solid #ddd;
+
+  border-bottom: 1px solid #ddd;
 }
 
-.info-pedido div {
-  display: flex;
 
-  flex-direction: column;
+.info-card span {
 
-  gap: 2px;
-}
-
-.info-pedido span {
   color: #666;
 
   font-size: 12px;
@@ -243,10 +270,12 @@
   font-weight: bold;
 }
 
-.info-pedido strong {
-  font-size: 18px;
+
+.info-card strong {
 
   color: #111;
+
+  font-size: 14px;
 }
 
 
@@ -254,36 +283,51 @@
    PRODUTOS
 ======================================== */
 
-.produtos-pedido h2 {
-  margin: 0 0 10px;
+.produtos-card {
 
-  font-size: 19px;
+  margin-top: 12px;
+}
+
+
+.produtos-card h3 {
+
+  margin: 0 0 7px;
+
+  font-size: 16px;
 
   color: #111;
 }
 
-.item-pedido {
+
+.item-card {
+
   display: flex;
 
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
-  padding: 7px 0;
+  padding: 6px 0;
 
   border-bottom: 1px solid #eee;
 
-  font-size: 16px;
+  font-size: 14px;
 }
 
-.item-pedido strong {
-  min-width: 35px;
 
-  font-size: 16px;
+.item-card strong {
+
+  min-width: 30px;
+
+  color: #111;
 }
 
-.item-pedido span {
+
+.item-card span {
+
   flex: 1;
+
+  color: #222;
 
   font-weight: bold;
 }
@@ -293,20 +337,33 @@
    STATUS
 ======================================== */
 
-.status-pedido {
+.status-card {
+
+  margin-top: 14px;
+
   text-align: center;
 }
 
-.status-pedido h2 {
-  margin: 0 0 10px;
 
-  font-size: 20px;
+.status-card h3 {
+
+  margin: 0 0 8px;
+
+  font-size: 16px;
+
+  color: #111;
 }
 
+
+/* ========================================
+   STATUS ATUAL
+======================================== */
+
 .status-atual {
+
   display: inline-block;
 
-  padding: 8px 18px;
+  padding: 7px 15px;
 
   background: #f5c400;
 
@@ -314,45 +371,65 @@
 
   border-radius: 7px;
 
-  font-size: 17px;
+  font-size: 14px;
 
   font-weight: 900;
 
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 
 /* ========================================
-   FLUXO
+   MINI FLUXO
 ======================================== */
 
-.fluxo-status {
+.mini-fluxo {
+
   display: flex;
 
-  align-items: center;
+  justify-content: space-between;
 
-  justify-content: center;
+  align-items: flex-start;
 
   width: 100%;
 
-  margin-bottom: 25px;
+  gap: 4px;
+
+  margin-bottom: 18px;
 }
 
-.etapa {
+
+.mini-etapa {
+
   display: flex;
 
+  flex-direction: column;
+
   align-items: center;
+
+  gap: 4px;
+
+  flex: 1;
 
   position: relative;
 }
 
 
-/* BOLINHA */
+/* ========================================
+   MINI BOLINHA
+======================================== */
 
-.bolinha {
-  width: 38px;
+.mini-bolinha {
 
-  height: 38px;
+  width: 30px;
+
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 
   border-radius: 50%;
 
@@ -360,63 +437,35 @@
 
   color: #777;
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 14px;
+  font-size: 12px;
 
   font-weight: bold;
 }
 
-.bolinha.ativa {
+
+.mini-bolinha.ativa {
+
   background: #f5c400;
 
   color: #000;
 }
 
 
-/* NOME STATUS */
+/* ========================================
+   NOME DO STATUS
+======================================== */
 
-.nome-status {
-  position: absolute;
+.mini-etapa span {
 
-  top: 45px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  white-space: nowrap;
+  font-size: 9px;
 
   color: #777;
 
-  font-size: 10px;
-
   font-weight: bold;
-}
 
-.nome-status.ativo {
-  color: #000;
-}
+  white-space: nowrap;
 
-
-/* LINHA */
-
-.linha-status {
-  width: 35px;
-
-  height: 4px;
-
-  background: #ddd;
-
-  margin: 0 4px;
-}
-
-.linha-status.preenchida {
-  background: #f5c400;
+  text-align: center;
 }
 
 
@@ -425,11 +474,12 @@
 ======================================== */
 
 .botao-avancar {
-  margin-top: 35px;
+
+  margin-top: 8px;
 
   width: 100%;
 
-  padding: 11px;
+  padding: 10px;
 
   border: none;
 
@@ -439,15 +489,21 @@
 
   color: white;
 
-  font-size: 15px;
+  font-size: 14px;
 
   font-weight: bold;
 
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
+
 .botao-avancar:hover {
+
   background: #333;
+
+  transform: scale(1.01);
 }
 
 
@@ -456,9 +512,10 @@
 ======================================== */
 
 .pedido-entregue {
-  margin-top: 25px;
 
-  padding: 18px;
+  margin-top: 12px;
+
+  padding: 12px;
 
   background: #222;
 
@@ -467,12 +524,18 @@
   border-radius: 8px;
 
   text-align: center;
+
+  font-size: 14px;
+
+  font-weight: bold;
 }
 
-.check-entregue {
-  width: 45px;
 
-  height: 45px;
+.check-entregue {
+
+  width: 40px;
+
+  height: 40px;
 
   margin: 0 auto 8px;
 
@@ -488,46 +551,27 @@
 
   color: #000;
 
-  font-size: 25px;
+  font-size: 23px;
 
   font-weight: bold;
 }
 
+
 .pedido-entregue h2 {
+
   margin: 5px 0;
 
   color: #ffd000;
 }
 
+
 .pedido-entregue p {
+
   margin: 5px 0;
 
   color: #ddd;
 
-  font-size: 14px;
-}
-
-
-/* ========================================
-   BOTÃO REMOVER
-======================================== */
-
-.botao-remover {
-  margin-top: 12px;
-
-  padding: 9px 15px;
-
-  border: none;
-
-  border-radius: 6px;
-
-  background: #f5c400;
-
-  color: #000;
-
-  font-weight: bold;
-
-  cursor: pointer;
+  font-size: 13px;
 }
 
 
@@ -535,12 +579,13 @@
    NENHUM PEDIDO
 ======================================== */
 
-.sem-pedidos {
-  grid-column: 1 / -1;
+.nenhum-pedido {
+
+  width: 100%;
 
   background: rgba(0, 0, 0, 0.65);
 
-  padding: 40px;
+  padding: 35px;
 
   border-radius: 12px;
 
@@ -549,20 +594,24 @@
   border: 2px solid #f5c400;
 }
 
-.sem-pedidos h2 {
+
+.nenhum-pedido h2 {
+
   margin: 0 0 8px;
 
   color: white;
-  
-  font-size: 28px;
+
+  font-size: 26px;
 }
 
-.sem-pedidos p {
+
+.nenhum-pedido p {
+
   margin: 0;
 
   color: white;
 
-  font-size: 18px;
+  font-size: 16px;
 }
 
 
@@ -570,34 +619,56 @@
    RESPONSIVO
 ======================================== */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
 
-  .pagina-pedido {
-    padding: 15px;
+  .lista-pedidos {
+
+    grid-template-columns:
+      repeat(2, minmax(260px, 1fr));
+
   }
 
+}
+
+
+@media (max-width: 650px) {
+
+  .pagina-pedido {
+
+    padding: 15px;
+
+  }
+
+
   .cabecalho-pedido {
+
     flex-direction: column;
 
     align-items: flex-start;
 
     gap: 15px;
+
   }
+
 
   .cabecalho-pedido h1 {
+
     font-size: 26px;
+
   }
 
-  .fila-pedidos {
+
+  .lista-pedidos {
+
     grid-template-columns: 1fr;
+
   }
 
-  .pedido {
-    padding: 18px;
-  }
 
-  .fluxo-status {
-    transform: scale(0.9);
+  .card-pedido {
+
+    max-width: 100%;
+
   }
 
 }

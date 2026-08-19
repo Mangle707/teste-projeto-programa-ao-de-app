@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pedido.css";
 
-function Pedido() {
+function Pedido({ carrinho }) {
 
   const [pedidos, setPedidos] = useState([]);
 
-
-  // =========================
-  // STATUS DO PEDIDO
-  // =========================
+  // ========================================
+  // STATUS
+  // ========================================
 
   const statusLista = [
     "Recebido",
@@ -19,94 +18,270 @@ function Pedido() {
   ];
 
 
-  // =========================
+  // ========================================
   // BUSCAR PEDIDOS
-  // =========================
+  // ========================================
 
   useEffect(() => {
 
-    const pedidosSalvos =
-      JSON.parse(localStorage.getItem("pedidos")) || [];
+    const carregarPedidos = () => {
 
-    setPedidos(pedidosSalvos);
+      const pedidosSalvos =
+        JSON.parse(
+          localStorage.getItem("pedidos")
+        ) || [];
+
+
+      // Mais antigo primeiro
+
+      const pedidosOrdenados =
+        [...pedidosSalvos].sort(
+          (a, b) =>
+            (a.criadoEm || 0) -
+            (b.criadoEm || 0)
+        );
+
+
+      setPedidos(
+        pedidosOrdenados
+      );
+
+    };
+
+
+    carregarPedidos();
+
+
+    window.addEventListener(
+      "pedidosAtualizados",
+      carregarPedidos
+    );
+
+
+    return () => {
+
+      window.removeEventListener(
+        "pedidosAtualizados",
+        carregarPedidos
+      );
+
+    };
 
   }, []);
 
 
-  // =========================
+  // ========================================
+  // FECHAR
+  // ========================================
+
+  const fecharPedido = (e) => {
+
+    const confirmar = window.confirm(
+      "Deseja sair e voltar ao login?"
+    );
+
+
+    if (!confirmar) {
+
+      e.preventDefault();
+
+      return;
+
+    }
+
+
+    localStorage.removeItem("login");
+
+    localStorage.removeItem(
+      "tipoUsuario"
+    );
+
+    localStorage.removeItem(
+      "nomeUsuario"
+    );
+
+  };
+
+
+  // ========================================
   // AVANÇAR STATUS
-  // =========================
+  // ========================================
 
   const avancarStatus = (id) => {
 
-    const pedidosAtualizados = pedidos.map((pedido) => {
-
-      if (pedido.id !== id) {
-        return pedido;
-      }
-
-
-      const statusAtual =
-        statusLista.indexOf(pedido.status);
-
-
-      if (statusAtual < statusLista.length - 1) {
-
-        return {
-          ...pedido,
-          status: statusLista[statusAtual + 1]
-        };
-
-      }
-
-
-      return pedido;
-
-    });
-
-
-    setPedidos(pedidosAtualizados);
-
-
-    localStorage.setItem(
-      "pedidos",
-      JSON.stringify(pedidosAtualizados)
-    );
-
-  };
-
-
-  // =========================
-  // REMOVER PEDIDO ENTREGUE
-  // =========================
-
-  const removerPedido = (id) => {
-
-    const pedidosAtualizados =
-      pedidos.filter(
-        (pedido) => pedido.id !== id
+    const pedidoAtual =
+      pedidos.find(
+        (pedido) =>
+          pedido.id === id
       );
 
 
-    setPedidos(pedidosAtualizados);
+    if (!pedidoAtual) {
+
+      return;
+
+    }
+
+
+    // ========================================
+    // PRONTO → ENTREGUE → REMOVE
+    // ========================================
+
+    if (
+      pedidoAtual.status === "Pronto"
+    ) {
+
+
+      /*
+        O pedido é considerado entregue
+        e retirado da fila.
+      */
+
+      const confirmar =
+        window.confirm(
+          `O pedido #${String(
+            pedidoAtual.numero
+          ).padStart(3, "0")} foi entregue?`
+        );
+
+
+      if (!confirmar) {
+
+        return;
+
+      }
+
+
+      const novaFila =
+        pedidos.filter(
+          (pedido) =>
+            pedido.id !== id
+        );
+
+
+      setPedidos(
+        novaFila
+      );
+
+
+      localStorage.setItem(
+        "pedidos",
+        JSON.stringify(
+          novaFila
+        )
+      );
+
+
+      window.dispatchEvent(
+        new Event(
+          "pedidosAtualizados"
+        )
+      );
+
+
+      return;
+
+    }
+
+
+    // ========================================
+    // RECEBIDO → PREPARANDO
+    // ========================================
+
+    let novoStatus =
+      "Recebido";
+
+
+    if (
+      pedidoAtual.status ===
+      "Recebido"
+    ) {
+
+      novoStatus =
+        "Preparando";
+
+    }
+
+
+    // ========================================
+    // PREPARANDO → PRONTO
+    // ========================================
+
+    else if (
+      pedidoAtual.status ===
+      "Preparando"
+    ) {
+
+      novoStatus =
+        "Pronto";
+
+    }
+
+
+    // ========================================
+    // ATUALIZA PEDIDO
+    // ========================================
+
+    const novaFila =
+      pedidos.map(
+        (pedido) => {
+
+          if (
+            pedido.id !== id
+          ) {
+
+            return pedido;
+
+          }
+
+
+          return {
+
+            ...pedido,
+
+            status:
+              novoStatus
+
+          };
+
+        }
+      );
+
+
+    setPedidos(
+      novaFila
+    );
 
 
     localStorage.setItem(
       "pedidos",
-      JSON.stringify(pedidosAtualizados)
+      JSON.stringify(
+        novaFila
+      )
+    );
+
+
+    window.dispatchEvent(
+      new Event(
+        "pedidosAtualizados"
+      )
     );
 
   };
 
+
+  // ========================================
+  // TELA
+  // ========================================
 
   return (
 
     <div className="pagina-pedido">
 
 
-      {/* =========================
+      {/* ========================================
           CABEÇALHO
-      ========================= */}
+      ======================================== */}
 
       <header className="cabecalho-pedido">
 
@@ -117,32 +292,37 @@ function Pedido() {
           </h1>
 
           <p>
-            Pedidos para a cozinha
+            Pedidos mais antigos aparecem primeiro
           </p>
 
         </div>
 
 
+        {/* FECHAR */}
+
         <Link
-          to="/"
+          to="/login"
           className="voltar-carrinho"
+          onClick={fecharPedido}
         >
-          ← Voltar
+
+          Fechar
+
         </Link>
 
       </header>
 
 
-      {/* =========================
+      {/* ========================================
           FILA
-      ========================= */}
+      ======================================== */}
 
       <main className="fila-pedidos">
 
 
         {pedidos.length === 0 ? (
 
-          <div className="sem-pedidos">
+          <div className="nenhum-pedido">
 
             <h2>
               Nenhum pedido na fila
@@ -157,310 +337,259 @@ function Pedido() {
         ) : (
 
 
-          pedidos.map((pedido, index) => {
-
-            const statusAtual =
-              statusLista.indexOf(
-                pedido.status
-              );
+          <div className="lista-pedidos">
 
 
-            return (
+            {pedidos.map(
+              (pedido, index) => {
 
-              <article
-                className="pedido"
-                key={pedido.id}
-              >
-
-
-                {/* =========================
-                    CABEÇALHO DO PEDIDO
-                ========================= */}
-
-                <header className="topo-pedido">
-
-                  <div>
-
-                    <h1>
-                      PEDIDO #
-                      {String(
-                        pedido.numero
-                      ).padStart(3, "0")}
-                    </h1>
-
-                    <p>
-                      Pedido para a cozinha
-                    </p>
-
-                  </div>
+                const statusAtual =
+                  statusLista.indexOf(
+                    pedido.status ||
+                    "Recebido"
+                  );
 
 
-                  <div className="posicao-fila">
+                return (
 
-                    <span>
-                      FILA
-                    </span>
-
-                    <strong>
-                      #{index + 1}
-                    </strong>
-
-                  </div>
-
-                </header>
+                  <div
+                    className="card-pedido"
+                    key={
+                      pedido.id ||
+                      index
+                    }
+                  >
 
 
-                <hr />
+                    {/* TOPO */}
 
+                    <div className="topo-card">
 
-                {/* =========================
-                    CLIENTE
-                ========================= */}
+                      <div>
 
-                <section className="cliente-pedido">
+                        <h2>
 
-                  <span>
-                    Cliente
-                  </span>
+                          Pedido #
 
-                  <strong>
-                    {pedido.nomeUsuario}
-                  </strong>
+                          {String(
+                            pedido.numero ||
+                            index + 1
+                          ).padStart(
+                            3,
+                            "0"
+                          )}
 
-                </section>
+                        </h2>
 
-
-                <hr />
-
-
-                {/* =========================
-                    INFORMAÇÕES
-                ========================= */}
-
-                <section className="info-pedido">
-
-                  <div>
-
-                    <span>
-                      Horário
-                    </span>
-
-                    <strong>
-                      {pedido.horario}
-                    </strong>
-
-                  </div>
-
-
-                  <div>
-
-                    <span>
-                      Posição
-                    </span>
-
-                    <strong>
-                      #{index + 1}
-                    </strong>
-
-                  </div>
-
-                </section>
-
-
-                <hr />
-
-
-                {/* =========================
-                    PRODUTOS
-                ========================= */}
-
-                <section className="produtos-pedido">
-
-                  <h2>
-                    Itens do Pedido
-                  </h2>
-
-
-                  {pedido.carrinho.map(
-                    (produto, produtoIndex) => (
-
-                      <div
-                        className="item-pedido"
-                        key={produtoIndex}
-                      >
 
                         <strong>
-                          {produto.quantidade}x
-                        </strong>
 
-                        <span>
-                          {produto.nome}
-                        </span>
+                          {pedido.nomeUsuario ||
+                            "Cliente"}
 
-                        <strong>
-                          R$ {(
-                            produto.preco *
-                            produto.quantidade
-                          ).toFixed(2)}
                         </strong>
 
                       </div>
 
-                    )
-                  )}
 
-                </section>
+                      {/* POSIÇÃO */}
 
+                      <span className="posicao-fila">
 
-                <hr />
+                        #{index + 1}
 
+                      </span>
 
-                {/* =========================
-                    STATUS
-                ========================= */}
-
-                <section className="status-pedido">
-
-                  <h2>
-                    Status
-                  </h2>
+                    </div>
 
 
-                  <div className="status-atual">
+                    {/* HORÁRIO */}
 
-                    {pedido.status}
+                    <div className="info-card">
 
-                  </div>
+                      <span>
+                        Horário:
+                      </span>
 
+                      <strong>
 
-                  {/* =========================
-                      FLUXO
-                  ========================= */}
+                        {pedido.horario ||
+                          "--:--"}
 
-                  <div className="fluxo-status">
+                      </strong>
 
-                    {statusLista.map(
-                      (item, statusIndex) => (
-
-                        <div
-                          key={item}
-                          className="etapa"
-                        >
-
-                          <div
-                            className={
-                              statusIndex <= statusAtual
-                                ? "bolinha ativa"
-                                : "bolinha"
-                            }
-                          >
-
-                            {statusIndex + 1}
-
-                          </div>
+                    </div>
 
 
-                          <span
-                            className={
-                              statusIndex <= statusAtual
-                                ? "nome-status ativo"
-                                : "nome-status"
-                            }
-                          >
+                    {/* PRODUTOS */}
 
-                            {item}
+                    <div className="produtos-card">
 
-                          </span>
+                      <h3>
+                        Itens
+                      </h3>
 
 
-                          {statusIndex <
-                            statusLista.length - 1 && (
+                      {pedido.carrinho &&
+                      pedido.carrinho.length > 0 ? (
+
+                        pedido.carrinho.map(
+                          (
+                            produto,
+                            produtoIndex
+                          ) => (
 
                             <div
-                              className={
-                                statusIndex <
-                                statusAtual
-                                  ? "linha-status preenchida"
-                                  : "linha-status"
+                              className="item-card"
+                              key={
+                                produtoIndex
                               }
-                            />
+                            >
 
-                          )}
+                              <strong>
+
+                                {
+                                  produto.quantidade
+                                }x
+
+                              </strong>
+
+
+                              <span>
+
+                                {
+                                  produto.nome
+                                }
+
+                              </span>
+
+                            </div>
+
+                          )
+
+                        )
+
+                      ) : (
+
+                        <div className="item-card">
+
+                          <span>
+                            Nenhum item
+                          </span>
 
                         </div>
 
-                      )
-                    )}
+                      )}
 
-                  </div>
-
-
-                  {/* =========================
-                      BOTÃO AVANÇAR
-                  ========================= */}
-
-                  {pedido.status !== "Entregue" && (
-
-                    <button
-                      className="botao-avancar"
-                      onClick={() =>
-                        avancarStatus(
-                          pedido.id
-                        )
-                      }
-                    >
-                      Avançar Pedido
-                    </button>
-
-                  )}
+                    </div>
 
 
-                  {/* =========================
-                      PEDIDO ENTREGUE
-                  ========================= */}
+                    {/* STATUS */}
 
-                  {pedido.status === "Entregue" && (
+                    <div className="status-card">
 
-                    <div className="pedido-entregue">
+                      <h3>
+                        Status
+                      </h3>
 
-                      <div className="check-entregue">
-                        ✓
+
+                      <div className="status-atual">
+
+                        {
+                          pedido.status ||
+                          "Recebido"
+                        }
+
                       </div>
 
 
-                      <h2>
-                        Pedido Entregue!
-                      </h2>
+                      {/* FLUXO */}
+
+                      <div className="mini-fluxo">
+
+                        {statusLista.map(
+                          (
+                            item,
+                            statusIndex
+                          ) => (
+
+                            <div
+                              key={item}
+                              className="mini-etapa"
+                            >
+
+                              <div
+                                className={
+                                  statusIndex <=
+                                  statusAtual
+
+                                    ?
+
+                                  "mini-bolinha ativa"
+
+                                    :
+
+                                  "mini-bolinha"
+                                }
+                              >
+
+                                {
+                                  statusIndex + 1
+                                }
+
+                              </div>
 
 
-                      <p>
-                        Cliente:{" "}
-                        {pedido.nomeUsuario}
-                      </p>
+                              <span>
 
+                                {item}
+
+                              </span>
+
+                            </div>
+
+                          )
+                        )}
+
+                      </div>
+
+
+                      {/* ========================================
+                          BOTÃO
+                      ======================================== */}
 
                       <button
-                        className="botao-remover"
+                        className="botao-avancar"
+
                         onClick={() =>
-                          removerPedido(
+                          avancarStatus(
                             pedido.id
                           )
                         }
                       >
-                        Remover da fila
+
+                        {pedido.status ===
+                        "Pronto"
+
+                          ? "Entregar Pedido"
+
+                          : "Avançar Pedido"}
+
                       </button>
+
 
                     </div>
 
-                  )}
 
-                </section>
+                  </div>
 
-              </article>
+                );
 
-            );
+              }
 
-          })
+            )}
+
+          </div>
 
         )}
 
@@ -471,5 +600,6 @@ function Pedido() {
   );
 
 }
+
 
 export default Pedido;
