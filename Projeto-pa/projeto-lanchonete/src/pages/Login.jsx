@@ -7,14 +7,15 @@ function Login({ onLogin }) {
 
   const [isVisible, setIsVisible] = useState(false);
 
-  const [tipoUsuario, setTipoUsuario] = useState("");
-
   const [nomeUsuario, setNomeUsuario] = useState("");
 
   const [senha, setSenha] = useState("");
 
   // Controla Login ou Criar Conta
   const [criandoConta, setCriandoConta] = useState(false);
+
+  // Tipo usado SOMENTE na criação da conta
+  const [tipoUsuario, setTipoUsuario] = useState("");
 
   const navigate = useNavigate();
 
@@ -60,16 +61,20 @@ function Login({ onLogin }) {
     e.preventDefault();
 
 
+    // Verifica tipo
+
     if (!tipoUsuario) {
 
       alert(
-        "Escolha se você é Cliente ou Funcionário."
+        "Escolha se a conta será de Cliente ou Funcionário."
       );
 
       return;
 
     }
 
+
+    // Verifica nome
 
     if (!nomeUsuario.trim()) {
 
@@ -82,6 +87,8 @@ function Login({ onLogin }) {
     }
 
 
+    // Verifica senha
+
     if (!senha.trim()) {
 
       alert(
@@ -93,11 +100,15 @@ function Login({ onLogin }) {
     }
 
 
+    // Busca usuários salvos
+
     const usuariosSalvos =
       JSON.parse(
         localStorage.getItem("usuarios")
       ) || [];
 
+
+    // Junta usuários padrão e criados
 
     const todosUsuarios = [
 
@@ -106,6 +117,8 @@ function Login({ onLogin }) {
 
     ];
 
+
+    // Verifica se já existe
 
     const usuarioExiste =
       todosUsuarios.some(
@@ -129,6 +142,8 @@ function Login({ onLogin }) {
     }
 
 
+    // Cria usuário
+
     const novoUsuario = {
 
       nome:
@@ -142,6 +157,8 @@ function Login({ onLogin }) {
 
     };
 
+
+    // Salva
 
     usuariosSalvos.push(
       novoUsuario
@@ -161,6 +178,8 @@ function Login({ onLogin }) {
     );
 
 
+    // Volta para login
+
     setCriandoConta(false);
 
     setNomeUsuario("");
@@ -173,7 +192,7 @@ function Login({ onLogin }) {
 
 
   // ========================================
-  // LOGIN
+  // LOGIN AUTOMÁTICO
   // ========================================
 
   const handleSubmit = (e) => {
@@ -181,16 +200,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
 
-    if (!tipoUsuario) {
-
-      alert(
-        "Escolha se você é Cliente ou Funcionário."
-      );
-
-      return;
-
-    }
-
+    // Verifica nome
 
     if (!nomeUsuario.trim()) {
 
@@ -203,6 +213,8 @@ function Login({ onLogin }) {
     }
 
 
+    // Verifica senha
+
     if (!senha.trim()) {
 
       alert(
@@ -214,11 +226,15 @@ function Login({ onLogin }) {
     }
 
 
+    // Busca usuários criados
+
     const usuariosSalvos =
       JSON.parse(
         localStorage.getItem("usuarios")
       ) || [];
 
+
+    // Junta todos os usuários
 
     const todosUsuarios = [
 
@@ -227,6 +243,10 @@ function Login({ onLogin }) {
 
     ];
 
+
+    // ========================================
+    // PROCURA PELO NOME E SENHA
+    // ========================================
 
     const usuarioEncontrado =
       todosUsuarios.find(
@@ -240,12 +260,12 @@ function Login({ onLogin }) {
 
           usuario.senha === senha
 
-          &&
-
-          usuario.tipo === tipoUsuario
-
       );
 
+
+    // ========================================
+    // LOGIN INCORRETO
+    // ========================================
 
     if (!usuarioEncontrado) {
 
@@ -259,6 +279,14 @@ function Login({ onLogin }) {
 
 
     // ========================================
+    // DESCOBRE AUTOMATICAMENTE O TIPO
+    // ========================================
+
+    const tipoEncontrado =
+      usuarioEncontrado.tipo;
+
+
+    // ========================================
     // SALVA LOGIN
     // ========================================
 
@@ -269,7 +297,7 @@ function Login({ onLogin }) {
 
     localStorage.setItem(
       "tipoUsuario",
-      tipoUsuario
+      tipoEncontrado
     );
 
     localStorage.setItem(
@@ -278,8 +306,10 @@ function Login({ onLogin }) {
     );
 
 
+    // Atualiza o App
+
     onLogin(
-      tipoUsuario,
+      tipoEncontrado,
       usuarioEncontrado.nome
     );
 
@@ -289,10 +319,12 @@ function Login({ onLogin }) {
     // ========================================
 
     if (
-      tipoUsuario === "funcionario"
+      tipoEncontrado === "funcionario"
     ) {
 
       navigate("/pedido");
+
+      return;
 
     }
 
@@ -301,11 +333,7 @@ function Login({ onLogin }) {
     // CLIENTE
     // ========================================
 
-    else {
-
-      navigate("/home");
-
-    }
+    navigate("/home");
 
   };
 
@@ -320,6 +348,10 @@ function Login({ onLogin }) {
       }`}
     >
 
+
+      {/* ========================================
+          PIXELS
+      ======================================== */}
 
       <div className={styles.pixels}>
 
@@ -339,8 +371,14 @@ function Login({ onLogin }) {
       </div>
 
 
+      {/* ========================================
+          CAIXA
+      ======================================== */}
+
       <div className={styles["login-box"]}>
 
+
+        {/* LOGO */}
 
         <img
           src="/IMG/Icone.png"
@@ -349,12 +387,16 @@ function Login({ onLogin }) {
         />
 
 
+        {/* TÍTULO */}
+
         <h1 className={styles["login-title"]}>
 
           Danger Hamburgers
 
         </h1>
 
+
+        {/* TÍTULO DA TELA */}
 
         <h2>
 
@@ -366,51 +408,56 @@ function Login({ onLogin }) {
 
 
         {/* ========================================
-            TIPO DE USUÁRIO
+            ESCOLHA DO TIPO
+            APENAS AO CRIAR CONTA
         ======================================== */}
 
-        <div className={styles["tipo-usuario"]}>
+        {criandoConta && (
+
+          <div className={styles["tipo-usuario"]}>
 
 
-          <button
-            type="button"
+            <button
+              type="button"
 
-            className={
-              tipoUsuario === "cliente"
-                ? styles.selecionado
-                : ""
-            }
+              className={
+                tipoUsuario === "cliente"
+                  ? styles.selecionado
+                  : ""
+              }
 
-            onClick={() =>
-              setTipoUsuario("cliente")
-            }
-          >
+              onClick={() =>
+                setTipoUsuario("cliente")
+              }
+            >
 
-            Cliente
+              Cliente
 
-          </button>
-
-
-          <button
-            type="button"
-
-            className={
-              tipoUsuario === "funcionario"
-                ? styles.selecionado
-                : ""
-            }
-
-            onClick={() =>
-              setTipoUsuario("funcionario")
-            }
-          >
-
-            Funcionário
-
-          </button>
+            </button>
 
 
-        </div>
+            <button
+              type="button"
+
+              className={
+                tipoUsuario === "funcionario"
+                  ? styles.selecionado
+                  : ""
+              }
+
+              onClick={() =>
+                setTipoUsuario("funcionario")
+              }
+            >
+
+              Funcionário
+
+            </button>
+
+
+          </div>
+
+        )}
 
 
         {/* ========================================
@@ -426,9 +473,12 @@ function Login({ onLogin }) {
         >
 
 
+          {/* USUÁRIO */}
+
           <input
             type="text"
             name="usuario"
+
             placeholder="Usuário"
 
             value={nomeUsuario}
@@ -443,9 +493,12 @@ function Login({ onLogin }) {
           />
 
 
+          {/* SENHA */}
+
           <input
             type="password"
             name="senha"
+
             placeholder="Senha"
 
             value={senha}
@@ -460,6 +513,10 @@ function Login({ onLogin }) {
           />
 
 
+          {/* ========================================
+              BOTÃO PRINCIPAL
+          ======================================== */}
+
           <button type="submit">
 
             {criandoConta
@@ -470,7 +527,7 @@ function Login({ onLogin }) {
 
 
           {/* ========================================
-              LOGIN
+              OPÇÕES DO LOGIN
           ======================================== */}
 
           {!criandoConta && (
